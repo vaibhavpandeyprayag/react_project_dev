@@ -9,7 +9,7 @@ var divStyle = {
 
 const AuthHero: FC<Props> = (props) => {
   return (
-    <div className="h-screen w-1/2 bg-center bg-75% bg-custom-bg p-12 bg-no-repeat" style={divStyle}>
+    <div className="hidden lg:flex h-screen w-1/2 bg-center bg-75% bg-custom-bg p-12 bg-no-repeat" style={divStyle}>
     </div>
   );
 };
