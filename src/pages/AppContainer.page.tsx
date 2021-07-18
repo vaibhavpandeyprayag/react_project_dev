@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import DashboardPage from "./Dashboard.page";
 import LecturePage from "./Lecture.page";
@@ -21,6 +21,9 @@ const AppContainer: FC<Props> = (props) => {
         </Route>
         <Route path="/batch/:batchNumber/lecture/:lectureNumber">
           <LecturePage />
+        </Route>
+        <Route>
+          <Redirect to="/not-found"></Redirect>
         </Route>
       </Switch>
     </div>

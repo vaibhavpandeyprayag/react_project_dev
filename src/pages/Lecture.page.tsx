@@ -5,11 +5,11 @@ interface Props {
 }
 
 const Lecture: FC<Props> = (props) => {
-  const data = useParams();
+  const { batchNumber, lectureNumber } = useParams<any>();
 
   return (
     <div>
-      This is lectures page.
+      This is lectures page. Lecture #{lectureNumber} of batch #{batchNumber}
     </div>
   );
 };

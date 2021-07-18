@@ -18,8 +18,11 @@ function App() {
         <Route path={["/dashboard", "/recordings", "/batch/:batchNumber/lecture/:lectureNumber"]} exact>
           <AppContainerPage />
         </Route>
+        <Route path="/not-found">
+          <NotFoundPage />
+        </Route>
         <Route>
-          <NotFoundPage></NotFoundPage>
+          <Redirect to="/not-found"></Redirect>
         </Route>
       </Switch>
     </BrowserRouter>

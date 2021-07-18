@@ -18,6 +18,9 @@ const Auth: FC<Props> = (props) => {
         <Route path="/signup">
           <SignupPage />
         </Route>
+        <Route>
+          <Redirect to="/not-found"></Redirect>
+        </Route>
       </Switch>
       <AuthHero />
     </div>
