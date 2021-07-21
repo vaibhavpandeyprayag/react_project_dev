@@ -7,9 +7,24 @@ interface Props {
 const Login: FC<Props> = (props) => {
 
   const [data, setData] = useState({ email: "", password: "" });
+  const [touched, setTouched] = useState({ email: false, password: false });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [event.target.name]: true });
+  }
+
+  let emailError = "";
+  let passwordError = "";
+
+  if (!data.email) emailError = "Email address is required!";
+  else if (!data.email.endsWith("@gmail.com")) emailError = "Please enter a valid email address.";
+
+  if (!data.password) passwordError = "Password is required!";
+  else if (data.password.length < 8) passwordError = "Password should be atleast 8 characters.";
 
   return (
     <div className="lg:w-1/2 w-full">
@@ -17,7 +32,7 @@ const Login: FC<Props> = (props) => {
         <h1 className="font-normal text-4xl w-full mb-4 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
         <div className="w-full">
-          <div className="relative flex items-center pt-2 pb-5">
+          <div className="relative flex items-center pt-2 pb-3">
             <svg
               className="absolute"
               xmlns="http://www.w3.org/2000/svg"
@@ -36,12 +51,14 @@ const Login: FC<Props> = (props) => {
               required
               value={data.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="w-full text-base pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 font-medium placeholder-gray-300 tracking-wider"
               placeholder="Email address"
             >
             </input>
           </div>
-          <div className="relative flex items-center pt-2 pb-5 mb-2">
+          <div className={"h-2 text-red-500 text-xs " + (touched.email ? "" : "invisible")}>{emailError}</div>
+          <div className="relative flex items-center pt-2 pb-3">
             <svg
               className="absolute"
               xmlns="http://www.w3.org/2000/svg"
@@ -60,12 +77,14 @@ const Login: FC<Props> = (props) => {
               required
               value={data.password}
               onChange={handleChange}
+              onBlur={handleBlur}
               className="w-full text-base pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 font-medium placeholder-gray-300 tracking-wider"
               placeholder="Password"
             >
             </input>
           </div>
-          <div className="flex justify-between mb-16">
+          <div className={"h-2 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
+          <div className="flex justify-between mb-16 mt-8">
             <label
               className="flex items-center text-sm text-gray-600 tracking-wider gap-3 cursor-pointer mb-3"
             >
@@ -97,12 +116,12 @@ const Login: FC<Props> = (props) => {
               Forgot Password?
             </Link>
           </div>
-          <h5 className="text-gray-700 text-sm tracking-wider mt-24">
+          <h5 className="text-gray-700 text-sm tracking-wider mt-20">
             © 2020 All Rights Reserved. <a href="" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="" className="text-blue-700 font-medium">Privacy</a>, and <a href="" className="text-blue-700 font-medium">Terms</a>
           </h5>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
