@@ -27,9 +27,9 @@ const Login: FC<Props> = (props) => {
   else if (data.password.length < 8) passwordError = "Password should be atleast 8 characters.";
 
   return (
-    <div className="lg:w-1/2 w-full">
+    <div className="lg:w-1/2 w-full flex flex-shrink">
       <div className="flex flex-col items-center mx-auto my-3 w-96">
-        <h1 className="font-normal text-4xl w-full mb-4 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
+        <h1 className="font-normal text-4xl w-full mt-4 mb-4 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
         <div className="w-full">
           <div className="relative flex items-center pt-2 pb-3">
@@ -116,7 +116,7 @@ const Login: FC<Props> = (props) => {
               Forgot Password?
             </Link>
           </div>
-          <h5 className="text-gray-700 text-sm tracking-wider mt-20">
+          <h5 className="text-gray-700 text-sm tracking-wider mt-16 pt-2">
             © 2020 All Rights Reserved. <a href="" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="" className="text-blue-700 font-medium">Privacy</a>, and <a href="" className="text-blue-700 font-medium">Terms</a>
           </h5>
         </div>
