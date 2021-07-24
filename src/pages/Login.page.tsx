@@ -1,5 +1,6 @@
+import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 interface Props {
 }
@@ -8,6 +9,10 @@ const Login: FC<Props> = (props) => {
 
   const [data, setData] = useState({ email: "", password: "" });
   const [touched, setTouched] = useState({ email: false, password: false });
+  const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setshowPassword] = useState(false)
+
+  const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -29,9 +34,23 @@ const Login: FC<Props> = (props) => {
   return (
     <div className="lg:w-1/2 w-full flex flex-shrink">
       <div className="flex flex-col items-center mx-auto my-3 w-96">
-        <h1 className="font-normal text-4xl w-full mt-4 mb-4 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
+        <h1 className="font-normal text-4xl w-full mt-4 mb-3 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
-        <div className="w-full">
+        <form className="w-full"
+          onSubmit={(event) => {
+            console.log("Working.");
+            event.preventDefault();
+
+            if (emailError || passwordError)
+              return;
+
+            setSubmitting(true);
+            setTimeout(() => {
+              history.push("/dashboard");
+            }, 5000)
+            setSubmitting(false);
+          }}
+        >
           <div className="relative flex items-center pt-2 pb-3">
             <svg
               className="absolute"
@@ -52,7 +71,7 @@ const Login: FC<Props> = (props) => {
               value={data.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="w-full text-base pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 font-medium placeholder-gray-300 tracking-wider"
+              className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
               placeholder="Email address"
             >
             </input>
@@ -72,34 +91,55 @@ const Login: FC<Props> = (props) => {
             <input
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "" : "password"}
               autoComplete="current-password"
               required
               value={data.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="w-full text-base pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 font-medium placeholder-gray-300 tracking-wider"
+              className="w-full text-sm font-medium pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
               placeholder="Password"
             >
             </input>
           </div>
           <div className={"h-2 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
-          <div className="flex justify-between mb-16 mt-8">
-            <label
-              className="flex items-center text-sm text-gray-600 tracking-wider gap-3 cursor-pointer mb-3"
-            >
-              Show password
-              <input
-                type="checkbox"
-                className="w-4 h-4 cursor-pointer"
+          <div className="flex items-center justify-between mb-16 mt-8">
+            <Switch.Group>
+              <div className="flex items-center cursor-pointer">
+                <Switch.Label className="pr-3 cursor-pointer text-sm tracking-wider text-gray-600">Show Password</Switch.Label>
+                <Switch
+                  checked={showPassword}
+                  onChange={setshowPassword}
+                  className={`${showPassword ? 'bg-blue-700' : 'bg-gray-200'} relative inline-flex flex-shrink-0 h-4 w-8 border-2 shadow-2xl drop-shadow-xl border-transparent rounded-full transform transition-colors ease-in-out duration-500 focus:outline-none focus-visible:ring-2  focus-visible:ring-black focus-visible:ring-opacity-75`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`${showPassword ? 'translate-x-4 bg-white' : 'translate-x-0 bg-blue-700'} pointer-events-none inline-block h-3 w-3 rounded-full shadow-2xl filter drop-shadow-2xl transform ring-0 transition ease-in-out duration-500`}
+                  />
+                </Switch>
+              </div>
+            </Switch.Group>
+            <div className="flex items-center gap-4">
+              {submitting &&
+                <svg className="w-8 h-8" viewBox="0 0 100 100" enable-background="new 0 0 0 0">
+                  <path stroke="blue" fill="blue" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                    <animateTransform
+                      attributeName="transform"
+                      attributeType="XML"
+                      type="rotate"
+                      dur="1s"
+                      from="0 50 50"
+                      to="360 50 50"
+                      repeatCount="indefinite" />
+                  </path>
+                </svg>
+              }
+              <button
+                className="w-auto text-white text-sm py-2 px-5 shadow-xl filter drop-shadow-xl hover:shadow-none hover:drop-shadow-none active:drop-shadow-none active:shadow-none transform ease-in-out duration-500 bg-blue-600 rounded-sm"
               >
-              </input>
-            </label>
-            <button
-              className="text-white text-sm py-2 px-5 shadow-xl filter drop-shadow-xl hover:shadow-none hover:drop-shadow-none active:drop-shadow-none active:shadow-none transform ease-in-out duration-500 bg-blue-600 rounded-sm"
-            >
-              Log In
-            </button>
+                Log In
+              </button>
+            </div>
           </div>
           <div className="flex flex-col items-center">
             <label
@@ -119,7 +159,7 @@ const Login: FC<Props> = (props) => {
           <h5 className="text-gray-700 text-sm tracking-wider mt-16 pt-2">
             © 2020 All Rights Reserved. <a href="" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="" className="text-blue-700 font-medium">Privacy</a>, and <a href="" className="text-blue-700 font-medium">Terms</a>
           </h5>
-        </div>
+        </form>
       </div>
     </div >
   );
