@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-import SideBar from "../components/SideBar";
 
 interface Props {
 }

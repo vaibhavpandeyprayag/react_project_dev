@@ -1,6 +1,7 @@
 import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import * as yup from "yup";
 
 interface Props {
 }
@@ -22,33 +23,40 @@ const Login: FC<Props> = (props) => {
     setTouched({ ...touched, [event.target.name]: true });
   }
 
+  const emailValidator = yup.object().shape({
+    email: yup.string().required().email()
+  });
+  const passwordValidator = yup.object().shape({
+    password: yup.string().required().min(8)
+  });
+
   let emailError = "";
   let passwordError = "";
 
   if (!data.email) emailError = "Email address is required!";
-  else if (!data.email.endsWith("@gmail.com")) emailError = "Please enter a valid email address.";
+  else if (!emailValidator.isValidSync(data)) emailError = "Please enter a valid email address.";
 
   if (!data.password) passwordError = "Password is required!";
-  else if (data.password.length < 8) passwordError = "Password should be atleast 8 characters.";
+  else if (!passwordValidator.isValidSync(data)) passwordError = "Password should be atleast 8 characters.";
 
   return (
     <div className="lg:w-1/2 w-full flex flex-shrink">
       <div className="flex flex-col items-center mx-auto my-3 w-96">
-        <h1 className="font-normal text-4xl w-full mt-4 mb-3 tracking-wider">Log In to <a href=""><span className="text-blue-600 font-medium">CORK</span></a></h1>
+        <h1 className="font-normal text-4xl w-full mt-4 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
         <form className="w-full"
           onSubmit={(event) => {
-            console.log("Working.");
             event.preventDefault();
-
-            if (emailError || passwordError)
+            if (emailError || passwordError) {
               return;
+            }
 
             setSubmitting(true);
+
             setTimeout(() => {
+              setSubmitting(false);
               history.push("/dashboard");
             }, 5000)
-            setSubmitting(false);
           }}
         >
           <div className="relative flex items-center pt-2 pb-3">
@@ -56,8 +64,8 @@ const Login: FC<Props> = (props) => {
               className="absolute"
               xmlns="http://www.w3.org/2000/svg"
               width="24" height="24" viewBox="0 0 24 24"
-              fill="lightblue" stroke="blue" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"
+              fill="lightblue" stroke="blue" strokeWidth="2"
+              strokeLinecap="round" strokeLinejoin="round"
             >
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
@@ -76,14 +84,14 @@ const Login: FC<Props> = (props) => {
             >
             </input>
           </div>
-          <div className={"h-2 text-red-500 text-xs " + (touched.email ? "" : "invisible")}>{emailError}</div>
-          <div className="relative flex items-center pt-2 pb-3">
+          <div className={"h-4 text-red-500 text-xs " + (touched.email ? "" : "invisible")}>{emailError}</div>
+          <div className="relative flex items-center pb-3">
             <svg
               className="absolute"
               xmlns="http://www.w3.org/2000/svg"
               width="24" height="24" viewBox="0 0 24 24"
-              fill="lightblue" stroke="blue" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"
+              fill="lightblue" stroke="blue" strokeWidth="2"
+              strokeLinecap="round" strokeLinejoin="round"
             >
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -102,8 +110,8 @@ const Login: FC<Props> = (props) => {
             >
             </input>
           </div>
-          <div className={"h-2 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
-          <div className="flex items-center justify-between mb-16 mt-8">
+          <div className={"h-4 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
+          <div className="flex items-center justify-between mb-16 mt-6">
             <Switch.Group>
               <div className="flex items-center cursor-pointer">
                 <Switch.Label className="pr-3 cursor-pointer text-sm tracking-wider text-gray-600">Show Password</Switch.Label>
@@ -121,7 +129,7 @@ const Login: FC<Props> = (props) => {
             </Switch.Group>
             <div className="flex items-center gap-4">
               {submitting &&
-                <svg className="w-8 h-8" viewBox="0 0 100 100" enable-background="new 0 0 0 0">
+                <svg className="w-8 h-8" viewBox="0 0 100 100" enableBackground="new 0 0 0 0">
                   <path stroke="blue" fill="blue" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
                     <animateTransform
                       attributeName="transform"
@@ -135,6 +143,8 @@ const Login: FC<Props> = (props) => {
                 </svg>
               }
               <button
+                type="submit"
+                disabled={!(emailValidator.isValidSync(data) || passwordValidator.isValidSync(data))}
                 className="w-auto text-white text-sm py-2 px-5 shadow-xl filter drop-shadow-xl hover:shadow-none hover:drop-shadow-none active:drop-shadow-none active:shadow-none transform ease-in-out duration-500 bg-blue-600 rounded-sm"
               >
                 Log In
@@ -157,7 +167,7 @@ const Login: FC<Props> = (props) => {
             </Link>
           </div>
           <h5 className="text-gray-700 text-sm tracking-wider mt-16 pt-2">
-            © 2020 All Rights Reserved. <a href="" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="" className="text-blue-700 font-medium">Privacy</a>, and <a href="" className="text-blue-700 font-medium">Terms</a>
+            © 2020 All Rights Reserved. <a href="www.google.com" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="www.google.com" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="www.google.com" className="text-blue-700 font-medium">Privacy</a>, and <a href="www.google.com" className="text-blue-700 font-medium">Terms</a>
           </h5>
         </form>
       </div>
