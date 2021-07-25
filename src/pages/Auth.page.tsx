@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import AuthHero from "../components/AuthHero";
+import ForgotPasswordPage from "./ForgotPassword.page";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 
@@ -9,13 +10,16 @@ interface Props {
 
 const Auth: FC<Props> = (props) => {
   return (
-    <div className="flex h-screen flex-row justify-between">
+    <div className="flex h-screen items-center flex-row justify-between">
       <Switch>
         <Route path="/login">
           <LoginPage />
         </Route>
         <Route path="/signup">
           <SignupPage />
+        </Route>
+        <Route path="/forgotpass">
+          <ForgotPasswordPage />
         </Route>
         <Route>
           <Redirect to="/not-found"></Redirect>

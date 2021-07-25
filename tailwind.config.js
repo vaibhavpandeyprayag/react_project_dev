@@ -13,7 +13,10 @@ module.exports = {
       },
       backgroundColor: theme => ({
         'custom-bg': '#060818'
-      })
+      }),
+      fontSize: {
+        '4.5xl': '2.50rem'
+      }
     },
   },
   variants: {

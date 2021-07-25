@@ -12,7 +12,7 @@ function App() {
         <Route path="/" exact>
           <Redirect to="/login" />
         </Route>
-        <Route path={["/login", "/signup"]} exact>
+        <Route path={["/login", "/signup", "/forgotpass"]} exact>
           <AuthPage />
         </Route>
         <Route path={["/dashboard", "/recordings", "/batch/:batchNumber/lecture/:lectureNumber"]} exact>

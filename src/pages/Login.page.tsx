@@ -2,6 +2,7 @@ import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
+import Button from "../components/button/Button";
 
 interface Props {
 }
@@ -40,9 +41,9 @@ const Login: FC<Props> = (props) => {
   else if (!passwordValidator.isValidSync(data)) passwordError = "Password should be atleast 8 characters.";
 
   return (
-    <div className="lg:w-1/2 w-full flex flex-shrink">
-      <div className="flex flex-col items-center mx-auto my-3 w-96">
-        <h1 className="font-normal text-4xl w-full mt-4 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
+    <div className="lg:w-1/2 w-full h-full flex flex-shrink">
+      <div className="flex flex-col items-center mx-auto w-96">
+        <h1 className="font-normal text-4xl w-full mt-6 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
         <form className="w-full"
           onSubmit={(event) => {
@@ -142,18 +143,18 @@ const Login: FC<Props> = (props) => {
                   </path>
                 </svg>
               }
-              <button
+              <Button
                 type="submit"
                 disabled={!(emailValidator.isValidSync(data) || passwordValidator.isValidSync(data))}
-                className="w-auto text-white text-sm py-2 px-5 shadow-xl filter drop-shadow-xl hover:shadow-none hover:drop-shadow-none active:drop-shadow-none active:shadow-none transform ease-in-out duration-500 bg-blue-600 rounded-sm"
+                className=""
               >
                 Log In
-              </button>
+              </Button>
             </div>
           </div>
           <div className="flex flex-col items-center">
             <label
-              className="flex items-center text-sm text-gray-600 tracking-wider gap-3 cursor-pointer mb-3"
+              className="flex items-center text-sm text-gray-600 tracking-wider gap-3 cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -162,11 +163,9 @@ const Login: FC<Props> = (props) => {
               </input>
               Keep me logged in
             </label>
-            <Link to="/" className="text-blue-700 text-base font-medium tracking-widest mt-3">
-              Forgot Password?
-            </Link>
+            <Link to="/forgotpass" className="text-blue-700 text-base font-medium tracking-widest mt-3">Forgot Password?</Link>
           </div>
-          <h5 className="text-gray-700 text-sm tracking-wider mt-16 pt-2">
+          <h5 className="text-gray-700 text-sm tracking-wider mt-12 mb-4 pt-2">
             © 2020 All Rights Reserved. <a href="www.google.com" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="www.google.com" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="www.google.com" className="text-blue-700 font-medium">Privacy</a>, and <a href="www.google.com" className="text-blue-700 font-medium">Terms</a>
           </h5>
         </form>
