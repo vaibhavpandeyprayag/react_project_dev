@@ -41,9 +41,9 @@ const Login: FC<Props> = (props) => {
   else if (!passwordValidator.isValidSync(data)) passwordError = "Password should be atleast 8 characters.";
 
   return (
-    <div className="lg:w-1/2 w-full h-full flex flex-shrink">
-      <div className="flex flex-col items-center mx-auto w-96">
-        <h1 className="font-normal text-4xl w-full mt-6 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
+    <div className="lg:w-1/2 w-full flex h-screen">
+      <div className="flex flex-col mx-auto w-96 h-auto my-auto text-gray-800">
+        <h1 className="font-normal text-4xl w-full mt-2 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
         <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
         <form className="w-full"
           onSubmit={(event) => {
@@ -165,8 +165,8 @@ const Login: FC<Props> = (props) => {
             </label>
             <Link to="/forgotpass" className="text-blue-700 text-base font-medium tracking-widest mt-3">Forgot Password?</Link>
           </div>
-          <h5 className="text-gray-700 text-sm tracking-wider mt-12 mb-4 pt-2">
-            © 2020 All Rights Reserved. <a href="www.google.com" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="www.google.com" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="www.google.com" className="text-blue-700 font-medium">Privacy</a>, and <a href="www.google.com" className="text-blue-700 font-medium">Terms</a>
+          <h5 className="text-gray-700 text-sm tracking-wider mt-12 mb-2 pt-2">
+            © 2020 All Rights Reserved. <a href="www.google.com" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="www.google.com" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="www.google.com" className="text-blue-700 font-medium">Privacy</a>, and <a href="www.google.com" className="text-blue-700 font-medium">Terms</a>.
           </h5>
         </form>
       </div>
