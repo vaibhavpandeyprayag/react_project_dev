@@ -9,10 +9,11 @@ interface Props {
 
 const Signup: FC<Props> = (props) => {
 
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ username: "", email: "", password: "" });
   const [touched, setTouched] = useState({ email: false, password: false });
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setshowPassword] = useState(false)
+  const [tAndC, settAndC] = useState(false);
 
   const history = useHistory();
 
@@ -31,8 +32,11 @@ const Signup: FC<Props> = (props) => {
     password: yup.string().required().min(8)
   });
 
+  let usernameError = "";
   let emailError = "";
   let passwordError = "";
+
+  if (!data.username) usernameError = "Username is required!";
 
   if (!data.email) emailError = "Email address is required!";
   else if (!emailValidator.isValidSync(data)) emailError = "Please enter a valid email address.";
@@ -43,12 +47,13 @@ const Signup: FC<Props> = (props) => {
   return (
     <div className="lg:w-1/2 w-full flex h-screen">
       <div className="flex flex-col mx-auto w-96 h-auto my-auto text-gray-800">
-        <h1 className="font-normal text-4xl w-full mt-2 mb-3 tracking-wider">Log In to <a href="www.google.com"><span className="text-blue-600 font-medium">CORK</span></a></h1>
-        <h5 className="w-full text-sm font-medium tracking-wide mb-10">New Here? <Link to="/signup"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Create an account</span></Link></h5>
+        <h1 className="font-normal text-4.5xl w-full mt-2 mb-3 leading-tight tracking-wider">Get started with a
+          free account</h1>
+        <h5 className="w-full text-sm font-medium tracking-wide mb-8">Already have an account? <Link to="/login"><span className="text-blue-700 border-b border-blue-700 pb-0.5">Log in</span></Link></h5>
         <form className="w-full"
           onSubmit={(event) => {
             event.preventDefault();
-            if (emailError || passwordError) {
+            if (usernameError || emailError || passwordError || !tAndC) {
               return;
             }
 
@@ -72,6 +77,34 @@ const Signup: FC<Props> = (props) => {
               <circle cx="12" cy="7" r="4"></circle>
             </svg>
             <input
+              id="username"
+              name="username"
+              type="username"
+              autoComplete="username"
+              required
+              value={data.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
+              placeholder="Username"
+            >
+            </input>
+          </div>
+          <div className="relative flex items-center pt-2 pb-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute"
+              width="28" height="28" viewBox="0 0 24 24"
+              fill="lightblue"
+              stroke="blue"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
+            <input
               id="email-address"
               name="email"
               type="email"
@@ -81,7 +114,7 @@ const Signup: FC<Props> = (props) => {
               onChange={handleChange}
               onBlur={handleBlur}
               className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Email address"
+              placeholder="Email"
             >
             </input>
           </div>
@@ -112,6 +145,17 @@ const Signup: FC<Props> = (props) => {
             </input>
           </div>
           <div className={"h-4 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
+          <label
+            className="flex items-center text-sm mt-2 text-gray-600 tracking-wider gap-3 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              className="w-4 h-4 cursor-pointer"
+              onChange={() => settAndC(!tAndC)}
+            >
+            </input>
+            I agree to the<a href="www.google.com"><span className="text-blue-600">terms and conditions</span></a>
+          </label>
           <div className="flex items-center justify-between mb-16 mt-6">
             <Switch.Group>
               <div className="flex items-center cursor-pointer">
@@ -145,25 +189,12 @@ const Signup: FC<Props> = (props) => {
               }
               <Button
                 type="submit"
-                disabled={!(emailValidator.isValidSync(data) || passwordValidator.isValidSync(data))}
+                disabled={false}
                 className=""
               >
-                Log In
+                Get Started!
               </Button>
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <label
-              className="flex items-center text-sm text-gray-600 tracking-wider gap-3 cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                className="w-4 h-4 cursor-pointer"
-              >
-              </input>
-              Keep me logged in
-            </label>
-            <Link to="/forgotpass" className="text-blue-700 text-base font-medium tracking-widest mt-3">Forgot Password?</Link>
           </div>
           <h5 className="text-gray-700 text-sm tracking-wider mt-12 mb-2 pt-2">
             © 2020 All Rights Reserved. <a href="www.google.com" className="text-blue-700 font-medium">CORK</a> is a product of Designreset. <a href="www.google.com" className="text-blue-700 font-medium">Cookie Preferences</a>, <a href="www.google.com" className="text-blue-700 font-medium">Privacy</a>, and <a href="www.google.com" className="text-blue-700 font-medium">Terms</a>.

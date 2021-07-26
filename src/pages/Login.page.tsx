@@ -62,14 +62,17 @@ const Login: FC<Props> = (props) => {
         >
           <div className="relative flex items-center pt-2 pb-3">
             <svg
-              className="absolute"
               xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" viewBox="0 0 24 24"
-              fill="lightblue" stroke="blue" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round"
+              className="absolute"
+              width="28" height="28" viewBox="0 0 24 24"
+              fill="lightblue"
+              stroke="blue"
             >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
             </svg>
             <input
               id="email-address"
@@ -81,7 +84,7 @@ const Login: FC<Props> = (props) => {
               onChange={handleChange}
               onBlur={handleBlur}
               className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Email address"
+              placeholder="Email"
             >
             </input>
           </div>
