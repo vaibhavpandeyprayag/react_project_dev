@@ -9,6 +9,6 @@ export default {
 export const Main = (args: any) => <ProgressBar {...args}></ProgressBar>;
 
 Main.args = {
-  value: "0"
+  value: 0
 }
 
