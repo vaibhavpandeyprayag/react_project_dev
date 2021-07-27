@@ -7,9 +7,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Alert: FC<Props> = ({ theme, children, className, ...rest }) => {
-  let themeClasses;
   const [display, setdisplay] = useState("flex");
+
+  let themeClasses;
   let alertType;
+
   if (theme === "primary") {
     alertType = "Primary!"
     themeClasses = "bg-indigo-50 text-indigo-500";
@@ -26,6 +28,7 @@ const Alert: FC<Props> = ({ theme, children, className, ...rest }) => {
     alertType = "Error!"
     themeClasses = "bg-red-50 text-red-500";
   }
+
   return (
     <div
       {...rest}

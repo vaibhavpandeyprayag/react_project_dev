@@ -2,6 +2,8 @@ import { FC, memo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import SolidButton from "../components/button/SolidButton";
+import Input from "../components/input/Input";
+import { HiOutlineAtSymbol } from "react-icons/hi";
 
 interface Props {
 }
@@ -50,33 +52,18 @@ const ForgotPassword: FC<Props> = (props) => {
             }, 5000)
           }}
         >
-          <div className="relative flex pt-2 mb-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute bottom-3"
-              width="28" height="28" viewBox="0 0 24 24"
-              fill="lightblue"
-              stroke="blue"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-            </svg>
-            <input
+          <div className="flex pt-2 mb-1">
+            <Input
+              Icon={HiOutlineAtSymbol}
               id="email-address"
               name="email"
               type="email"
               autoComplete="email"
+              placeholder="Email"
               required
               value={data.email}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Email"
-            >
-            </input>
+              onBlur={handleBlur} />
           </div>
           <div className={"h-4 text-red-500 text-xs mb-2 " + (touched.email ? "" : "invisible")}>{emailError}</div>
           <div className="flex items-center gap-4">

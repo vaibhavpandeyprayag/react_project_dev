@@ -1,8 +1,10 @@
 import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
+import { HiOutlineUser, HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import SolidButton from "../components/button/SolidButton";
+import Input from "../components/input/Input";
 
 interface Props {
 }
@@ -65,88 +67,48 @@ const Signup: FC<Props> = (props) => {
             }, 5000)
           }}
         >
-          <div className="relative flex items-center pt-2 pb-3">
-            <svg
-              className="absolute"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" viewBox="0 0 24 24"
-              fill="lightblue" stroke="blue" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <input
+          <div className="flex">
+            <Input
+              Icon={HiOutlineUser}
               id="username"
               name="username"
-              type="username"
+              type={"username"}
               autoComplete="username"
+              placeholder="Username"
               required
               value={data.username}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Username"
-            >
-            </input>
+              onBlur={handleBlur} />
           </div>
-          <div className="relative flex items-center pt-2 pb-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute"
-              width="28" height="28" viewBox="0 0 24 24"
-              fill="lightblue"
-              stroke="blue"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-            </svg>
-            <input
+          <div className="flex mb-1">
+            <Input
+              Icon={HiOutlineAtSymbol}
               id="email-address"
               name="email"
               type="email"
               autoComplete="email"
-              required
+              placeholder="Email"
               value={data.email}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full text-sm font-medium  pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Email"
-            >
-            </input>
+              onBlur={handleBlur} />
           </div>
           <div className={"h-4 text-red-500 text-xs " + (touched.email ? "" : "invisible")}>{emailError}</div>
-          <div className="relative flex items-center pb-3">
-            <svg
-              className="absolute"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" viewBox="0 0 24 24"
-              fill="lightblue" stroke="blue" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round"
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <input
+          <div className="flex mb-1">
+            <Input
+              Icon={HiOutlineLockClosed}
               id="password"
               name="password"
               type={showPassword ? "" : "password"}
-              autoComplete="current-password"
+              autoComplete="password"
+              placeholder="Password"
               required
               value={data.password}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full text-sm font-medium pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700"
-              placeholder="Password"
-            >
-            </input>
+              onBlur={handleBlur} />
           </div>
           <div className={"h-4 text-red-500 text-xs " + (touched.password ? "" : "invisible")}>{passwordError}</div>
           <label
-            className="flex items-center text-sm mt-2 text-gray-600 tracking-wider gap-3 cursor-pointer"
+            className="flex items-center text-sm mt-3 text-gray-600 tracking-wider gap-3 cursor-pointer"
           >
             <input
               type="checkbox"
