@@ -1,15 +1,17 @@
 import { ButtonHTMLAttributes, FC, memo } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  theme?: "primary" | "secondary",
+  theme?: "primary" | "secondary" | "dark",
   children: string
 }
 
-const Button: FC<Props> = ({ theme, children, className, ...rest }) => {
+const SolidButton: FC<Props> = ({ theme, children, className, ...rest }) => {
   const themeClasses =
     theme === "primary"
       ? "bg-blue-600"
-      : "bg-gray-500";
+      : (theme === "secondary"
+        ? "bg-purple-500"
+        : "bg-gray-700");
   return (
     <button
       {...rest}
@@ -20,8 +22,8 @@ const Button: FC<Props> = ({ theme, children, className, ...rest }) => {
   );
 }
 
-Button.defaultProps = {
+SolidButton.defaultProps = {
   theme: "primary"
 };
 
-export default memo(Button);
+export default memo(SolidButton);

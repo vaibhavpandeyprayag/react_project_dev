@@ -2,7 +2,7 @@ import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import Button from "../components/button/Button";
+import SolidButton from "../components/button/SolidButton";
 
 interface Props {
 }
@@ -146,13 +146,13 @@ const Login: FC<Props> = (props) => {
                   </path>
                 </svg>
               }
-              <Button
+              <SolidButton
                 type="submit"
                 disabled={!(emailValidator.isValidSync(data) || passwordValidator.isValidSync(data))}
                 className=""
               >
                 Log In
-              </Button>
+              </SolidButton>
             </div>
           </div>
           <div className="flex flex-col items-center">

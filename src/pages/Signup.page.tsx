@@ -2,7 +2,7 @@ import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import Button from "../components/button/Button";
+import SolidButton from "../components/button/SolidButton";
 
 interface Props {
 }
@@ -187,13 +187,13 @@ const Signup: FC<Props> = (props) => {
                   </path>
                 </svg>
               }
-              <Button
+              <SolidButton
                 type="submit"
                 disabled={false}
                 className=""
               >
                 Get Started!
-              </Button>
+              </SolidButton>
             </div>
           </div>
           <h5 className="text-gray-700 text-sm tracking-wider mt-12 mb-2 pt-2">
