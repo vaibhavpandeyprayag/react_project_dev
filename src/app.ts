@@ -31,7 +31,7 @@ interface User {
 }
 
 const BASE_URL = "https://api-dev.domecompass.com";
-const LS_LOGIN_TOKEN = "login_token";
+export const LS_LOGIN_TOKEN = "login_token";
 
 export const login = (data: LoginRequest) => {
   const url = BASE_URL + "/login";
@@ -40,6 +40,10 @@ export const login = (data: LoginRequest) => {
     localStorage.setItem("login_token", response.data.token);
     return response.data.user;
   });
+};
+
+export const logout = () => {
+  localStorage.removeItem(LS_LOGIN_TOKEN);
 };
 
 interface GroupRequest {
