@@ -5,7 +5,6 @@ import SolidButton from "./button/SolidButton";
 
 interface Props {}
 const SideBar: FC<Props> = (props) => {
-  const history = useHistory();
   return (
     <div className="flex flex-col h-screen w-1/6 p-1.5 bg-blue-800 text-white">
       <h1 className="text-xl text-center">SideBar</h1>
@@ -14,7 +13,7 @@ const SideBar: FC<Props> = (props) => {
         theme="dark"
         onClick={() => {
           logout();
-          history.push("/login");
+          window.location.href = "/login";
         }}
       >
         Logout
