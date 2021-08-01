@@ -63,7 +63,9 @@ const Login: FC<Props> = (props) => {
         <form
           className="w-full"
           onSubmit={(event) => {
-            login(data);
+            login(data).then(() => {
+              history.push("/dashboard");
+            });
             event.preventDefault();
             /*
             if (emailError || passwordError) {
