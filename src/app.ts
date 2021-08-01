@@ -1,4 +1,13 @@
 import axios from "axios";
+import { config } from "process";
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem(LS_LOGIN_TOKEN);
+
+  if (!token) return config;
+
+  return { ...config, headers: { ...config.headers, Authorization: token } };
+});
 
 interface LoginRequest {
   email: string;
@@ -42,9 +51,8 @@ interface GroupRequest {
 
 export const fetchGroups = (data: GroupRequest) => {
   const url = BASE_URL + "/groups";
-  const token = localStorage.getItem(LS_LOGIN_TOKEN);
   axios
-    .get(url, { params: data, headers: { Authorization: token } })
+    .get(url, { params: data })
     .then((response) => console.log(response))
     .catch((e) => console.error(e));
 };
