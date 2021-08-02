@@ -5,7 +5,7 @@ import * as yup from "yup";
 import SolidButton from "../components/button/SolidButton";
 import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../components/input/Input";
-import { login } from "../app";
+import { login } from "../api/auth";
 
 interface Props {}
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-import { fetchGroups } from "../app";
 import GroupsList from "../components/group/GroupsList";
 import Input from "../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
+import { fetchGroups } from "../api/group";
 
 interface Props {}
 

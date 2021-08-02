@@ -1,6 +1,5 @@
-import { HTMLAttributes } from "react";
-import { FC, memo, useEffect } from "react";
-import { Group, GroupResponse } from "../../app";
+import { FC, memo } from "react";
+import { Group } from "../../modals/Group";
 import GroupCard from "./GroupCard";
 
 interface Props {

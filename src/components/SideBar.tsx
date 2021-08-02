@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
-import { logout } from "../app";
-import OutlineButton from "./button/OutlineButton";
+import { logout } from "../api/auth";
 import SolidButton from "./button/SolidButton";
 
 interface Props {}

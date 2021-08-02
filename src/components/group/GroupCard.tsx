@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes, memo } from "react";
-import { Group } from "../../app";
+import { Group } from "../../modals/Group";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   group: Group;
@@ -15,6 +15,7 @@ const GroupCard: FC<Props> = ({ group, imgclassName, className }) => {
       }
     >
       <img
+        alt=""
         src={group.group_image_url}
         className={"w-20 h-20 rounded-full " + imgclassName}
       />
