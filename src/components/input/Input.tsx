@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  Icon?: IconType
+  Icon?: IconType;
 }
 
 const Input: FC<Props> = ({ Icon, children, className, ...rest }) => {
@@ -16,15 +16,17 @@ const Input: FC<Props> = ({ Icon, children, className, ...rest }) => {
       )}
       <input
         {...rest}
-        className={"w-full text-sm font-medium pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700 " + className}
-      >
-      </input>
-    </div >
+        className={
+          "w-full text-sm font-medium pt-4 pb-4 pl-9 outline-none ring-0 border-b border-gray-300 placeholder-gray-300 tracking-wider focus:border-blue-700 " +
+          className
+        }
+      ></input>
+    </div>
   );
 };
 
 Input.defaultProps = {
-  Icon: HiOutlinePencilAlt
+  Icon: HiOutlinePencilAlt,
 };
 
 export default memo(Input);

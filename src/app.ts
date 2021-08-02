@@ -1,5 +1,4 @@
 import axios from "axios";
-import { config } from "process";
 
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem(LS_LOGIN_TOKEN);
@@ -53,10 +52,25 @@ interface GroupRequest {
   status: "all-groups" | "favourite" | "archieved";
 }
 
+export interface Group {
+  id: number;
+  name: string;
+  group_image_url: string;
+  description: string;
+  created_at: string;
+}
+
+export interface GroupResponse {
+  data: Group[];
+}
+
 export const fetchGroups = (data: GroupRequest) => {
   const url = BASE_URL + "/groups";
-  axios
-    .get(url, { params: data })
-    .then((response) => console.log(response))
+  return axios
+    .get<GroupResponse>(url, { params: data })
+    .then((response) => {
+      console.log(response.data.data);
+      return response.data.data;
+    })
     .catch((e) => console.error(e));
 };
