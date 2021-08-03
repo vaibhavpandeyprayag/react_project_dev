@@ -6,10 +6,13 @@ import SolidButton from "../../components/button/SolidButton";
 import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
+import { User } from "../../modals/User";
 
-interface Props {}
+interface Props {
+  onLogin: (user: User) => void;
+}
 
-const Login: FC<Props> = (props) => {
+const Login: FC<Props> = ({ onLogin }) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [touched, setTouched] = useState({ email: false, password: false });
   const [submitting, setSubmitting] = useState(false);
@@ -63,7 +66,8 @@ const Login: FC<Props> = (props) => {
         <form
           className="w-full"
           onSubmit={(event) => {
-            login(data).then(() => {
+            login(data).then((u) => {
+              onLogin(u);
               history.push("/dashboard");
             });
             event.preventDefault();

@@ -5,10 +5,13 @@ import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
+import { User } from "../../modals/User";
 
-interface Props {}
+interface Props {
+  user: User;
+}
 
-const Dashboard: FC<Props> = (props) => {
+const Dashboard: FC<Props> = ({ user }) => {
   const [query, setQuery] = useState("");
   const [groupsFetched, setGroups] = useState([]);
   useEffect(() => {
@@ -18,7 +21,7 @@ const Dashboard: FC<Props> = (props) => {
   }, [query]);
   return (
     <div className="flex flex-col w-5/6 h-screen m-4 gap-4">
-      <h1>This is Dashboard.</h1>
+      <h1>Hello {user.first_name} ~ Welcome to Dashboard.</h1>
       <Link className="w-auto mr-auto" to="/recordings">
         <span className="text-indigo-800"> Go to Recordings</span>
       </Link>
