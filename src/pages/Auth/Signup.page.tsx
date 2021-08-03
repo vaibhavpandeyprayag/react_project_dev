@@ -3,8 +3,8 @@ import React, { FC, memo, useState } from "react";
 import { HiOutlineUser, HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import SolidButton from "../components/button/SolidButton";
-import Input from "../components/input/Input";
+import SolidButton from "../../components/button/SolidButton";
+import Input from "../../components/input/Input";
 
 interface Props {
 }

@@ -2,10 +2,10 @@ import { Switch } from "@headlessui/react";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import SolidButton from "../components/button/SolidButton";
+import SolidButton from "../../components/button/SolidButton";
 import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
-import Input from "../components/input/Input";
-import { login } from "../api/auth";
+import Input from "../../components/input/Input";
+import { login } from "../../api/auth";
 
 interface Props {}
 
