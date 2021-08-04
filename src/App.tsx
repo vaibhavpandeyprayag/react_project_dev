@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useState, useEffect } from "react";
+import React, { FC, Suspense, useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { me } from "./api/auth";
 import { LS_AUTH_TOKEN } from "./api/base";
@@ -20,12 +20,16 @@ const App: FC<Props> = (props) => {
     me().then((u) => setUser(u));
   }, []);
 
+  const data = useMemo(() => {
+    return { user, setUser };
+  }, [user, setUser]);
+
   if (!user && token) {
     return <div>Loading...</div>;
   }
 
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={data}>
       <Suspense
         fallback={<div className="text-blue-800 text-lg">Loading...</div>}
       >

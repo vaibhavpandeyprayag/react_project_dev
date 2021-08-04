@@ -14,7 +14,7 @@ interface Props {
   onLogin: (user: User) => void;
 }
 
-const Login: FC<Props> = ({ onLogin }) => {
+const Login: FC<Props> = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [touched, setTouched] = useState({ email: false, password: false });
   const [submitting, setSubmitting] = useState(false);
