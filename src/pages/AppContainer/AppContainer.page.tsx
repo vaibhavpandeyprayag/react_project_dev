@@ -1,24 +1,21 @@
 import { FC, memo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import SideBar from "../../components/SideBar";
-import { User } from "../../modals/User";
 import DashboardPage from "./Dashboard.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
 
-interface Props {
-  user: User;
-}
+interface Props {}
 
-const AppContainer: FC<Props> = ({ user }) => {
+const AppContainer: FC<Props> = (props) => {
   return (
     <div className="flex flex-row">
       <div className="w-1/6">
-        <SideBar user={user} />
+        <SideBar />
       </div>
       <Switch>
         <Route path="/dashboard">
-          <DashboardPage user={user} />
+          <DashboardPage />
         </Route>
         <Route path="/recordings">
           <RecordingsPage />

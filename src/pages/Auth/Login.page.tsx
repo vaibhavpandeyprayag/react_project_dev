@@ -7,6 +7,8 @@ import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
 import { User } from "../../modals/User";
+import { useContext } from "react";
+import AppContext from "../../App.context";
 
 interface Props {
   onLogin: (user: User) => void;
@@ -19,6 +21,8 @@ const Login: FC<Props> = ({ onLogin }) => {
   const [showPassword, setshowPassword] = useState(false);
 
   const history = useHistory();
+
+  const { setUser } = useContext(AppContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -66,8 +70,10 @@ const Login: FC<Props> = ({ onLogin }) => {
         <form
           className="w-full"
           onSubmit={(event) => {
+            setSubmitting(true);
             login(data).then((u) => {
-              onLogin(u);
+              setSubmitting(false);
+              setUser(u);
               history.push("/dashboard");
             });
             event.preventDefault();

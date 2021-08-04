@@ -5,15 +5,15 @@ import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
-import { User } from "../../modals/User";
+import { useContext } from "react";
+import AppContext from "../../App.context";
 
-interface Props {
-  user: User;
-}
+interface Props {}
 
-const Dashboard: FC<Props> = ({ user }) => {
+const Dashboard: FC<Props> = (props) => {
   const [query, setQuery] = useState("");
   const [groupsFetched, setGroups] = useState([]);
+  const { user } = useContext(AppContext);
   useEffect(() => {
     fetchGroups({ status: "all-groups", query: query }).then((response: any) =>
       setGroups(response)
@@ -21,7 +21,7 @@ const Dashboard: FC<Props> = ({ user }) => {
   }, [query]);
   return (
     <div className="flex flex-col w-5/6 h-screen m-4 gap-4">
-      <h1>Hello {user.first_name} ~ Welcome to Dashboard.</h1>
+      <h1>Hello {user!.first_name} ~ Welcome to Dashboard.</h1>
       <Link className="w-auto mr-auto" to="/recordings">
         <span className="text-indigo-800"> Go to Recordings</span>
       </Link>
