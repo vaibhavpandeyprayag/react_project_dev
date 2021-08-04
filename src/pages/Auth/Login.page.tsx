@@ -6,13 +6,9 @@ import SolidButton from "../../components/button/SolidButton";
 import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
-import { User } from "../../modals/User";
-import { useContext } from "react";
-import AppContext from "../../App.context";
+import { useDispatch } from "react-redux";
 
-interface Props {
-  onLogin: (user: User) => void;
-}
+interface Props {}
 
 const Login: FC<Props> = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -22,7 +18,7 @@ const Login: FC<Props> = (props) => {
 
   const history = useHistory();
 
-  const { setUser } = useContext(AppContext);
+  const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -73,7 +69,7 @@ const Login: FC<Props> = (props) => {
             setSubmitting(true);
             login(data).then((u) => {
               setSubmitting(false);
-              setUser(u);
+              dispatch({ type: "me/login", payload: u });
               history.push("/dashboard");
             });
             event.preventDefault();

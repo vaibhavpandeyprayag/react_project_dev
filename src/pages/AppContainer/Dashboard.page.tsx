@@ -5,15 +5,17 @@ import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
-import { useContext } from "react";
-import AppContext from "../../App.context";
+import { useSelector } from "react-redux";
+import { User } from "../../modals/User";
+import { AppState } from "../../store";
 
 interface Props {}
 
 const Dashboard: FC<Props> = (props) => {
   const [query, setQuery] = useState("");
   const [groupsFetched, setGroups] = useState([]);
-  const { user } = useContext(AppContext);
+  const user = useSelector<AppState, User | undefined>((state) => state.me);
+  //const { user } = useContext(AppContext);
   useEffect(() => {
     fetchGroups({ status: "all-groups", query: query }).then((response: any) =>
       setGroups(response)
