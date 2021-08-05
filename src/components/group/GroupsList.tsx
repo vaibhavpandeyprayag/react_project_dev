@@ -1,12 +1,11 @@
 import { FC, memo } from "react";
-import { Group } from "../../modals/Group";
+import { useAppSelector } from "../../store";
 import GroupCard from "./GroupCard";
 
-interface Props {
-  groups: Group[];
-}
+interface Props {}
 
-const GroupsList: FC<Props> = ({ groups }) => {
+const GroupsList: FC<Props> = (props) => {
+  const groups = useAppSelector((state) => state.groups);
   return (
     <div className="p-2 ">
       {groups.map((eachGroup) => (

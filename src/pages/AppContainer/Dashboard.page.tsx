@@ -5,20 +5,18 @@ import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
-import { useSelector } from "react-redux";
-import { User } from "../../modals/User";
-import { AppState } from "../../store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../store";
 
 interface Props {}
 
 const Dashboard: FC<Props> = (props) => {
   const [query, setQuery] = useState("");
-  const [groupsFetched, setGroups] = useState([]);
-  const user = useSelector<AppState, User | undefined>((state) => state.me);
-  //const { user } = useContext(AppContext);
+  const user = useAppSelector((state) => state.me);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchGroups({ status: "all-groups", query: query }).then((response: any) =>
-      setGroups(response)
+    fetchGroups({ status: "all-groups", query: query }).then((response) =>
+      dispatch({ type: "groups/fetch", payload: response })
     );
   }, [query]);
   return (
@@ -34,7 +32,7 @@ const Dashboard: FC<Props> = (props) => {
             setQuery(e.target.value);
           }}
         />
-        <GroupsList groups={groupsFetched} />
+        <GroupsList />
       </div>
     </div>
   );
