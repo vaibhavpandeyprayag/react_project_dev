@@ -8,6 +8,7 @@ import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
 import { AiOutlineLoading } from "react-icons/ai";
+import { meFetchAction } from "../../store";
 
 interface Props {}
 
@@ -70,7 +71,7 @@ const Login: FC<Props> = (props) => {
             setSubmitting(true);
             login(data).then((u) => {
               setSubmitting(false);
-              dispatch({ type: "me/login", payload: u });
+              dispatch(meFetchAction(u));
               history.push("/dashboard");
             });
             event.preventDefault();
@@ -154,7 +155,12 @@ const Login: FC<Props> = (props) => {
               </div>
             </Switch.Group>
             <div className="flex items-center gap-4">
-              {submitting && AiOutlineLoading}
+              {submitting && (
+                <AiOutlineLoading
+                  className="w-6 h-6 animate-spin"
+                  style={{ stroke: "blue", fill: "blue", strokeWidth: 40 }}
+                />
+              )}
               <SolidButton
                 type="submit"
                 disabled={

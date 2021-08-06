@@ -5,7 +5,11 @@ import GroupCard from "./GroupCard";
 interface Props {}
 
 const GroupsList: FC<Props> = (props) => {
-  const groups = useAppSelector((state) => state.groups);
+  const groups = useAppSelector((state) => {
+    const groupsIds = state.groupQueryMap[state.groupQuery] || [];
+    const groups = groupsIds.map((id) => state.groups[id]);
+    return groups;
+  });
   return (
     <div className="p-2 ">
       {groups.map((eachGroup) => (

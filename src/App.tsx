@@ -8,7 +8,7 @@ import { User } from "./modals/User";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/Auth.lazy";
 import NotFoundPage from "./pages/NotFound.page";
-import { AppState } from "./store";
+import { AppState, meFetchAction } from "./store";
 
 interface Props {}
 
@@ -20,16 +20,28 @@ const App: FC<Props> = (props) => {
   useEffect(() => {
     if (!token) return;
 
-    me().then((u) => dispatch({ type: "me/fetch", payload: u }));
+    me().then((u) => dispatch(meFetchAction(u)));
   }, []);
 
   if (!user && token) {
-    return <div>{AiOutlineLoading}</div>;
+    return (
+      <AiOutlineLoading
+        className="w-6 h-6 animate-spin"
+        style={{ stroke: "blue", fill: "blue", strokeWidth: 40 }}
+      />
+    );
   }
 
   return (
     <>
-      <Suspense fallback={<div>{AiOutlineLoading}</div>}>
+      <Suspense
+        fallback={
+          <AiOutlineLoading
+            className="w-6 h-6 animate-spin"
+            style={{ stroke: "blue", fill: "blue", strokeWidth: 40 }}
+          />
+        }
+      >
         <BrowserRouter>
           <Switch>
             <Route path="/" exact>
