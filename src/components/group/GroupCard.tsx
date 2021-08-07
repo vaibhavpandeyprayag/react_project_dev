@@ -10,7 +10,7 @@ const GroupCard: FC<Props> = ({ group, imgclassName, className }) => {
   return (
     <div
       className={
-        "flex items-center gap-8 my-2 mx-2 px-4 py-3 text-white rounded-lg border border-blue-500 bg-blue-500 hover:bg-blue-600 " +
+        "flex items-center gap-8 my-2 mx-2 px-4 py-3 rounded-xl border bg-gray-50 hover:bg-gray-200 " +
         className
       }
     >

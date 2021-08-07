@@ -1,11 +1,10 @@
 import { FC, Suspense, useEffect } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { meFetchAction } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { LS_AUTH_TOKEN } from "./api/base";
-import { User } from "./modals/User";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/Auth.lazy";
 import NotFoundPage from "./pages/NotFound.page";

@@ -10,11 +10,16 @@ const SideBar: FC<Props> = () => {
     (state) => state.users.byId[state.auth.id!].first_name
   );
   return (
-    <div className="flex flex-col w-1/6 h-screen p-1.5 bg-blue-500 text-white fixed left-0 bottom-0 top-0">
-      <h1 className="text-xl text-center ">SideBar</h1>
-      <div className="my-2">{userFirstName}</div>
+    <div className="flex flex-col text-center gap-2 w-1/6 h-screen p-1.5 bg-gray-900 text-white fixed left-0 bottom-0 top-0">
+      <div className="flex items-center justify-between mb-5">
+        <h1 className="text-xl ">SideBar</h1>
+        {userFirstName}
+      </div>
+      <SolidButton className="hover:scale-95" theme="dark" onClick={() => {}}>
+        Groups
+      </SolidButton>
       <SolidButton
-        className=""
+        className="hover:scale-95"
         theme="dark"
         onClick={() => {
           logout();

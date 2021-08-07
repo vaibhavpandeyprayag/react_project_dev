@@ -28,7 +28,7 @@ const Dashboard: FC<Props> = (props) => {
     });
   }, [query]);
   return (
-    <div className="flex flex-col w-5/6 h-screen m-4 gap-4">
+    <div className="flex flex-col w-5/6 m-4 gap-4">
       <h1>Hello {user!.first_name} ~ Welcome to Dashboard.</h1>
       <Link className="w-auto mr-auto" to="/recordings">
         <span className="text-indigo-800"> Go to Recordings</span>

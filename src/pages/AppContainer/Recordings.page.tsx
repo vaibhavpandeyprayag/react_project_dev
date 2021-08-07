@@ -1,13 +1,15 @@
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
 
-interface Props {
-}
+interface Props {}
 
 const Recordings: FC<Props> = (props) => {
   return (
-    <div>
-      This is Recordings page. <Link to="/dashboard"><span className="text-indigo-800"> Go to dashboard</span></Link>
+    <div className="flex flex-col w-5/6 m-4 gap-4">
+      This is Recordings page.{" "}
+      <Link to="/dashboard">
+        <span className="text-indigo-800"> Go to dashboard</span>
+      </Link>
     </div>
   );
 };

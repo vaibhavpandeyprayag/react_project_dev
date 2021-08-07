@@ -38,7 +38,7 @@ export const groupReducer: Reducer<GroupState> = (
           ...state.queryMap,
           [action.payload.query]: groupIds,
         },
-        groups: { ...state.byId, ...groupMap },
+        byId: { ...state.byId, ...groupMap },
       };
     default:
       return state;
