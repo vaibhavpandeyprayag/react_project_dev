@@ -6,8 +6,8 @@ interface Props {}
 
 const GroupsList: FC<Props> = (props) => {
   const groups = useAppSelector((state) => {
-    const groupsIds = state.groupQueryMap[state.groupQuery] || [];
-    const groups = groupsIds.map((id) => state.groups[id]);
+    const groupsIds = state.groups.queryMap[state.groups.query] || [];
+    const groups = groupsIds.map((id) => state.groups.byId[id]);
     return groups;
   });
   return (

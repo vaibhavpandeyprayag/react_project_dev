@@ -8,7 +8,7 @@ import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
 import { AiOutlineLoading } from "react-icons/ai";
-import { meFetchAction } from "../../store";
+import { meLoginAction } from "../../actions/auth.actions";
 
 interface Props {}
 
@@ -71,7 +71,7 @@ const Login: FC<Props> = (props) => {
             setSubmitting(true);
             login(data).then((u) => {
               setSubmitting(false);
-              dispatch(meFetchAction(u));
+              dispatch(meLoginAction(u));
               history.push("/dashboard");
             });
             event.preventDefault();

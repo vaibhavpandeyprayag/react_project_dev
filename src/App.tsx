@@ -2,19 +2,22 @@ import { FC, Suspense, useEffect } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { meFetchAction } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { LS_AUTH_TOKEN } from "./api/base";
 import { User } from "./modals/User";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/Auth.lazy";
 import NotFoundPage from "./pages/NotFound.page";
-import { AppState, meFetchAction } from "./store";
+import { useAppSelector } from "./store";
 
 interface Props {}
 
 const App: FC<Props> = (props) => {
   const token = localStorage.getItem(LS_AUTH_TOKEN);
-  const user = useSelector<AppState, User | undefined>((state) => state.me);
+  const user = useAppSelector(
+    (state) => state.auth.id && state.users.byId[state.auth.id]
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {

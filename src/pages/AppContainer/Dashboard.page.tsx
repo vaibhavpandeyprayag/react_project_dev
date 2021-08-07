@@ -6,19 +6,23 @@ import Input from "../../components/input/Input";
 import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
 import { useDispatch } from "react-redux";
-import { GROUPS_QUERY, QUERY_COMPLETED, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
+import {
+  GROUPS_QUERY_COMPLETED,
+  GROUPS_QUERY,
+} from "../../actions/groups.actions";
 
 interface Props {}
 
 const Dashboard: FC<Props> = (props) => {
-  const query = useAppSelector((state) => state.groupQuery);
+  const query = useAppSelector((state) => state.groups.query);
 
-  const user = useAppSelector((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auth.id!]);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchGroups({ status: "all-groups", query: query }).then((groups) => {
       dispatch({
-        type: QUERY_COMPLETED,
+        type: GROUPS_QUERY_COMPLETED,
         payload: { groups: groups, query: query },
       });
     });
