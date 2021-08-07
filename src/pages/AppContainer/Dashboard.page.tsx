@@ -7,13 +7,15 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { fetchGroups } from "../../api/group";
 import { useAppSelector } from "../../store";
 import { groupsActions } from "../../actions/groups.actions";
+import { groupQuerySelector } from "../../selectors/groups.selectors";
+import { meSelector } from "../../selectors/auth.selectors";
 
 interface Props {}
 
 const Dashboard: FC<Props> = (props) => {
-  const query = useAppSelector((state) => state.groups.query);
+  const query = useAppSelector(groupQuerySelector);
 
-  const user = useAppSelector((state) => state.users.byId[state.auth.id!]);
+  const user = useAppSelector(meSelector);
 
   useEffect(() => {
     fetchGroups({ status: "all-groups", query: query }).then((groups) =>
