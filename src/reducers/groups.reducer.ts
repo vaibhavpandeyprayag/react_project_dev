@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import {
   GROUPS_QUERY,
   GROUPS_QUERY_COMPLETED,
-} from "../actions/groups.actions";
+} from "../actions/actions.constants";
 import { Group } from "../modals/Group";
 
 export interface GroupState {

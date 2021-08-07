@@ -1,8 +1,7 @@
 import { FC, Suspense, useEffect } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
-import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { meFetchAction } from "./actions/auth.actions";
+import { authActions } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { LS_AUTH_TOKEN } from "./api/base";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
@@ -17,12 +16,11 @@ const App: FC<Props> = (props) => {
   const user = useAppSelector(
     (state) => state.auth.id && state.users.byId[state.auth.id]
   );
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) return;
 
-    me().then((u) => dispatch(meFetchAction(u)));
+    me().then((u) => authActions.fetch(u));
   }, []);
 
   if (!user && token) {

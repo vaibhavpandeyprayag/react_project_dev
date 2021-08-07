@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { ME_LOGIN, ME_FETCH } from "../actions/auth.actions";
+import { ME_LOGIN, ME_FETCH } from "../actions/actions.constants";
 
 export interface AuthState {
   id?: number;

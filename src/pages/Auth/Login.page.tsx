@@ -6,9 +6,8 @@ import SolidButton from "../../components/button/SolidButton";
 import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
-import { useDispatch } from "react-redux";
 import { AiOutlineLoading } from "react-icons/ai";
-import { meLoginAction } from "../../actions/auth.actions";
+import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 
@@ -19,8 +18,6 @@ const Login: FC<Props> = (props) => {
   const [showPassword, setshowPassword] = useState(false);
 
   const history = useHistory();
-
-  const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -71,7 +68,7 @@ const Login: FC<Props> = (props) => {
             setSubmitting(true);
             login(data).then((u) => {
               setSubmitting(false);
-              dispatch(meLoginAction(u));
+              authActions.login(u);
               history.push("/dashboard");
             });
             event.preventDefault();
