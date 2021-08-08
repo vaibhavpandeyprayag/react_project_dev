@@ -1,14 +1,13 @@
 import { FC, memo } from "react";
 import { logout } from "../api/auth";
+import { meSelector } from "../selectors/auth.selectors";
 import { useAppSelector } from "../store";
 import SolidButton from "./button/SolidButton";
 
 interface Props {}
 
 const SideBar: FC<Props> = () => {
-  const userFirstName = useAppSelector(
-    (state) => state.users.byId[state.auth.id!].first_name
-  );
+  const userFirstName = useAppSelector(meSelector)?.first_name;
   return (
     <div className="flex flex-col text-center gap-2 w-1/6 h-screen p-1.5 bg-gray-900 text-white fixed left-0 bottom-0 top-0">
       <div className="flex items-center justify-between mb-5">
