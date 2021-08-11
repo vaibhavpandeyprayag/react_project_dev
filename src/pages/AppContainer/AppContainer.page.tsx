@@ -1,7 +1,9 @@
 import { FC, memo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import SideBar from "../../components/SideBar";
+import GroupDetailsPage from "./GroupDetails.page";
 import DashboardPage from "./Dashboard.page";
+import GroupsListPage from "./GroupsList.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
 
@@ -16,6 +18,12 @@ const AppContainer: FC<Props> = (props) => {
       <Switch>
         <Route path="/dashboard">
           <DashboardPage />
+        </Route>
+        <Route path="/groups/:id">
+          <GroupDetailsPage />
+        </Route>
+        <Route path="/groups">
+          <GroupsListPage />
         </Route>
         <Route path="/recordings">
           <RecordingsPage />

@@ -17,5 +17,8 @@ export const fetchGroups = (data: GroupRequest) => {
   const url = BASE_URL + "/groups";
   return axios
     .get<GroupResponse>(url, { params: data })
-    .then((response) => response.data.data);
+    .then((response) => {
+      console.log(url);
+      return response.data.data;
+    });
 };

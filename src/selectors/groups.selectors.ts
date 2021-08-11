@@ -26,7 +26,7 @@ const groupQueryMapSelector = createSelector(
 //   return groupState.byId;
 // };
 
-const groupIdSelector = createSelector(
+export const groupIdSelector = createSelector(
   [groupStateSelector],
   (groupState) => groupState.byId
 );
