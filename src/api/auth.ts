@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authActions } from "../actions/auth.actions";
 import { User } from "../modals/User";
 import { BASE_URL, LS_AUTH_TOKEN } from "./base";
 
@@ -32,7 +33,7 @@ interface MeResponse {
   data: User;
 }
 
-export const me = () => {
+export const meAPI = () => {
   const url = BASE_URL + "/me";
   return axios.get<MeResponse>(url).then((response) => response.data.data);
 };

@@ -1,8 +1,7 @@
 import { FC, Suspense, useEffect } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { authActions } from "./actions/auth.actions";
-import { me } from "./api/auth";
+import { me } from "./middlewares/auth.middleware";
 import { LS_AUTH_TOKEN } from "./api/base";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/Auth.lazy";
@@ -19,7 +18,7 @@ const App: FC<Props> = (props) => {
   useEffect(() => {
     if (!token) return;
 
-    me().then((u) => authActions.fetch(u));
+    me();
   }, []);
 
   if (!user && token) {

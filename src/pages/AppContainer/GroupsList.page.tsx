@@ -1,23 +1,21 @@
 import { FC, memo, useEffect } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { groupsActions } from "../../actions/groups.actions";
-import { fetchGroups } from "../../api/group";
 import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
-import { groupQuerySelector } from "../../selectors/groups.selectors";
+import { fetchGroups } from "../../middlewares/groups.middleware";
+import {
+  groupLoadingSelector,
+  groupQuerySelector,
+} from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
 interface Props {}
 
 const Groups: FC<Props> = (props) => {
   const query = useAppSelector(groupQuerySelector);
-  useEffect(() => {
-    fetchGroups({ status: "all-groups", query: query }).then((groups) =>
-      groupsActions.queryCompleted(query, groups)
-    );
-  }, [query]);
-
+  const loading = useAppSelector(groupLoadingSelector);
+  console.log(loading);
   return (
     <div className="flex flex-col w-5/6 m-4 gap-4">
       <Link to="/dashboard">
@@ -27,10 +25,18 @@ const Groups: FC<Props> = (props) => {
         <Input
           Icon={AiOutlineSearch}
           value={query}
-          onChange={(e) => groupsActions.query(e.target.value)}
+          onChange={(e) =>
+            fetchGroups({ query: e.target.value, status: "all-groups" })
+          }
         />
-        <GroupsList />
+        {loading && (
+          <AiOutlineLoading
+            className="w-6 h-6 animate-spin"
+            style={{ stroke: "blue", fill: "blue", strokeWidth: 40 }}
+          />
+        )}
       </div>
+      <GroupsList />
     </div>
   );
 };
