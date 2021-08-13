@@ -15,7 +15,6 @@ interface Props {}
 const Groups: FC<Props> = (props) => {
   const query = useAppSelector(groupQuerySelector);
   const loading = useAppSelector(groupLoadingSelector);
-  console.log(loading);
   return (
     <div className="flex flex-col w-5/6 m-4 gap-4">
       <Link to="/dashboard">
