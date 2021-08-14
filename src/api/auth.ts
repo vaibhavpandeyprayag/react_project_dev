@@ -1,5 +1,4 @@
 import axios from "axios";
-import { authActions } from "../actions/auth.actions";
 import { User } from "../modals/User";
 import { BASE_URL, LS_AUTH_TOKEN } from "./base";
 

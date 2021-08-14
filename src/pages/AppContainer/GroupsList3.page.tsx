@@ -1,12 +1,12 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import { AiOutlineLoading, AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
 import { fetchGroupsApproach3 } from "../../middlewares/groups.middleware";
 import {
-  groupLoadingSelector,
   groupQuerySelector,
+  groupsLoadingApproach3Selector,
 } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
@@ -14,7 +14,7 @@ interface Props {}
 
 const Groups: FC<Props> = (props) => {
   const query = useAppSelector(groupQuerySelector);
-  const loading = useAppSelector(groupLoadingSelector);
+  const loading = useAppSelector(groupsLoadingApproach3Selector);
   return (
     <div className="flex flex-col w-5/6 m-4 gap-4">
       <Link to="/dashboard">

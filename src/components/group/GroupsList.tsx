@@ -1,9 +1,6 @@
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-import {
-  currentQueryGroupsSelector,
-  groupLoadingSelector,
-} from "../../selectors/groups.selectors";
+import { currentQueryGroupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
 interface Props {}

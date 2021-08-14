@@ -1,3 +1,4 @@
+import axios, { Canceler } from "axios";
 import { groupsActions } from "../actions/groups.actions";
 import { GroupRequest, fetchGroupsAPI } from "../api/group";
 import {
@@ -32,15 +33,20 @@ export const fetchGroupsApproach2 = (request: GroupRequest) => {
   });
 };
 
+let canceler: Canceler | undefined;
+
 export const fetchGroupsApproach3 = (request: GroupRequest) => {
   const query = request.query;
-  const groupMap = groupQueryMapSelector(store.getState());
-  const groupIds = groupMap[query];
-  groupsActions.queryApproach1(query, !groupIds);
 
-  if (groupIds) return;
+  canceler && canceler();
 
-  fetchGroupsAPI(request).then((groups) => {
-    groupsActions.queryCompleted(query, groups);
+  groupsActions.queryApproach3(query);
+
+  const { token, cancel } = axios.CancelToken.source(); // gives token and corresponding cancelation function
+  canceler = cancel;
+
+  fetchGroupsAPI(request, token).then((groups) => {
+    groupsActions.queryCompletedApproach3(query, groups);
+    canceler = undefined;
   });
 };

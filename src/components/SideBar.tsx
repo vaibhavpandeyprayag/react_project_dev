@@ -42,7 +42,7 @@ const SideBar: FC<Props> = () => {
             history.push("/groupsApproach3");
           }}
         >
-          Groups (Request Approach 2)
+          Groups (Request Approach 3)
         </SolidButton>
         <SolidButton
           className="hover:scale-95"
