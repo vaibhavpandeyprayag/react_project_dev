@@ -3,9 +3,9 @@ import { store } from "../store";
 import { GROUPS_QUERY, GROUPS_QUERY_COMPLETED } from "./actions.constants";
 import { bindActionCreators } from "redux";
 
-const QueryAction = (query: string) => ({
+const QueryAction = (query: string, loading: boolean) => ({
   type: GROUPS_QUERY,
-  payload: query,
+  payload: { query, loading },
 });
 
 const QueryCompletedAction = (query: string, groups: Group[]) => ({

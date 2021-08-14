@@ -6,7 +6,7 @@ export const groupQuerySelector = createSelector(
   (groupState) => groupState.query
 );
 
-const groupQueryMapSelector = createSelector(
+export const groupQueryMapSelector = createSelector(
   [groupStateSelector],
   (groupState) => groupState.queryMap
 );

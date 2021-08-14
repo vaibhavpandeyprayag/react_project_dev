@@ -27,8 +27,11 @@ export const groupReducer: Reducer<GroupState> = (
     case GROUPS_QUERY:
       return {
         ...state,
-        query: action.payload,
-        loadingQuery: { ...state.loadingQuery, [action.payload]: true },
+        query: action.payload.query,
+        loadingQuery: {
+          ...state.loadingQuery,
+          [action.payload.query]: action.payload.loading,
+        },
       };
     case GROUPS_QUERY_COMPLETED:
       const groups = action.payload.groups as Group[];
