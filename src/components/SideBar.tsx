@@ -21,10 +21,28 @@ const SideBar: FC<Props> = () => {
           className="hover:scale-95"
           theme="dark"
           onClick={() => {
-            history.push("/groups");
+            history.push("/groupsApproach1");
           }}
         >
-          Groups
+          Groups (Request Approach 1)
+        </SolidButton>
+        <SolidButton
+          className="hover:scale-95"
+          theme="dark"
+          onClick={() => {
+            history.push("/groupsApproach2");
+          }}
+        >
+          Groups (Request Approach 2)
+        </SolidButton>
+        <SolidButton
+          className="hover:scale-95"
+          theme="dark"
+          onClick={() => {
+            history.push("/groupsApproach3");
+          }}
+        >
+          Groups (Request Approach 2)
         </SolidButton>
         <SolidButton
           className="hover:scale-95"

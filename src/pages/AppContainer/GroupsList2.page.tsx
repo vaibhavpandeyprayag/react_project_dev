@@ -3,7 +3,7 @@ import { AiOutlineLoading, AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
-import { fetchGroups } from "../../middlewares/groups.middleware";
+import { fetchGroupsApproach2 } from "../../middlewares/groups.middleware";
 import {
   groupLoadingSelector,
   groupQuerySelector,
@@ -25,7 +25,10 @@ const Groups: FC<Props> = (props) => {
           Icon={AiOutlineSearch}
           value={query}
           onChange={(e) =>
-            fetchGroups({ query: e.target.value, status: "all-groups" })
+            fetchGroupsApproach2({
+              query: e.target.value,
+              status: "all-groups",
+            })
           }
         />
         {loading && (

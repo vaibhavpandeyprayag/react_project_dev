@@ -3,7 +3,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import GroupDetailsPage from "./GroupDetails.page";
 import DashboardPage from "./Dashboard.page";
-import GroupsListPage from "./GroupsList.page";
+import GroupsListPage1 from "./GroupsList1.page";
+import GroupsListPage2 from "./GroupsList2.page";
+import GroupsListPage3 from "./GroupsList3.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
 
@@ -22,8 +24,14 @@ const AppContainer: FC<Props> = (props) => {
         <Route path="/groups/:id">
           <GroupDetailsPage />
         </Route>
-        <Route path="/groups">
-          <GroupsListPage />
+        <Route path="/groupsApproach1">
+          <GroupsListPage1 />
+        </Route>
+        <Route path="/groupsApproach2">
+          <GroupsListPage2 />
+        </Route>
+        <Route path="/groupsApproach3">
+          <GroupsListPage3 />
         </Route>
         <Route path="/recordings">
           <RecordingsPage />

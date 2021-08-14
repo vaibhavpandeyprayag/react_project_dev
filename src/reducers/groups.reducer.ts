@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import {
-  GROUPS_QUERY,
+  GROUPS_QUERY_APPROACH1,
+  GROUPS_QUERY_APPROACH2,
   GROUPS_QUERY_COMPLETED,
 } from "../actions/actions.constants";
 import { Group } from "../modals/Group";
@@ -24,13 +25,22 @@ export const groupReducer: Reducer<GroupState> = (
   action
 ) => {
   switch (action.type) {
-    case GROUPS_QUERY:
+    case GROUPS_QUERY_APPROACH1:
       return {
         ...state,
         query: action.payload.query,
         loadingQuery: {
           ...state.loadingQuery,
           [action.payload.query]: action.payload.loading,
+        },
+      };
+    case GROUPS_QUERY_APPROACH2:
+      return {
+        ...state,
+        query: action.payload,
+        loadingQuery: {
+          ...state.loadingQuery,
+          [action.payload]: true,
         },
       };
     case GROUPS_QUERY_COMPLETED:
@@ -49,20 +59,6 @@ export const groupReducer: Reducer<GroupState> = (
           [action.payload.query]: false,
         },
       };
-
-    // const groups = action.payload.groups as Group[];
-    // const groupIds = groups.map((g) => g.id);
-    // const groupMap = groups.reduce((prev, group) => {
-    //   return { ...prev, [group.id]: group };
-    // }, {});
-    // return {
-    //   ...state,
-    //   queryMap: {
-    //     ...state.queryMap,
-    //     [action.payload.query]: groupIds,
-    //   },
-    //   byId: { ...state.byId, ...groupMap },
-    // };
     default:
       return state;
   }
