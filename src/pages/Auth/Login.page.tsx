@@ -7,7 +7,8 @@ import { HiOutlineAtSymbol, HiOutlineLockClosed } from "react-icons/hi";
 import Input from "../../components/input/Input";
 import { login } from "../../api/auth";
 import { AiOutlineLoading } from "react-icons/ai";
-import { authActions } from "../../actions/auth.actions";
+import { meFetchAction } from "../../actions/auth.actions";
+import { useDispatch } from "react-redux";
 
 interface Props {}
 
@@ -16,7 +17,7 @@ const Login: FC<Props> = (props) => {
   const [touched, setTouched] = useState({ email: false, password: false });
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setshowPassword] = useState(false);
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +69,8 @@ const Login: FC<Props> = (props) => {
             setSubmitting(true);
             login(data).then((u) => {
               setSubmitting(false);
-              authActions.login(u);
+              dispatch(meFetchAction(u));
+              //authActions.login(u);
               history.push("/dashboard");
             });
             event.preventDefault();

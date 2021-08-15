@@ -1,9 +1,10 @@
 import { FC, memo } from "react";
 import { AiOutlineLoading, AiOutlineSearch } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { QueryActionApproach1 } from "../../actions/groups.actions";
 import GroupsList from "../../components/group/GroupsList";
 import Input from "../../components/input/Input";
-import { fetchGroupsApproach1 } from "../../middlewares/groups.middleware";
 import {
   groupsLoadingSelector,
   groupQuerySelector,
@@ -15,6 +16,8 @@ interface Props {}
 const Groups: FC<Props> = (props) => {
   const query = useAppSelector(groupQuerySelector);
   const loading = useAppSelector(groupsLoadingSelector);
+  const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col w-5/6 m-4 gap-4">
       <Link to="/dashboard">
@@ -25,10 +28,7 @@ const Groups: FC<Props> = (props) => {
           Icon={AiOutlineSearch}
           value={query}
           onChange={(e) =>
-            fetchGroupsApproach1({
-              query: e.target.value,
-              status: "all-groups",
-            })
+            dispatch(QueryActionApproach1(e.target.value, loading))
           }
         />
         {loading && (
