@@ -16,6 +16,16 @@ export const groupIdSelector = createSelector(
   (groupState) => groupState.byId
 );
 
+export const selectedIdSelector = createSelector(
+  [groupStateSelector],
+  (groupState) => groupState.selectedId
+);
+
+export const selectedGroupSelector = createSelector(
+  [groupIdSelector, selectedIdSelector],
+  (byId, id) => id && byId[id]
+);
+
 export const groupQueryLoadingSelector = createSelector(
   [groupStateSelector],
   (groupState) => groupState.loadingQuery!

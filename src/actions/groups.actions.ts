@@ -5,6 +5,8 @@ import {
   GROUPS_QUERY_APPROACH3,
   GROUPS_QUERY_COMPLETED,
   GROUPS_QUERY_COMPLETED_APPROACH3,
+  GROUP_FETCH_ONE,
+  GROUP_FETCH_ONE_COMPLETED,
 } from "./actions.constants";
 
 export const QueryActionApproach1 = (query: string, loading: boolean) => ({
@@ -33,4 +35,14 @@ export const QueryCompletedActionApproach3 = (
 ) => ({
   type: GROUPS_QUERY_COMPLETED_APPROACH3,
   payload: { query, groups },
+});
+
+export const fetchOneGroupAction = (id: string) => ({
+  type: GROUP_FETCH_ONE,
+  payload: id,
+});
+
+export const fetchOneGroupCompletedAction = (group: Group) => ({
+  type: GROUP_FETCH_ONE_COMPLETED,
+  payload: group,
 });

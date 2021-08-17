@@ -11,9 +11,15 @@ import {
   GROUPS_QUERY_APPROACH1,
   GROUPS_QUERY_APPROACH2,
   GROUPS_QUERY_APPROACH3,
+  GROUP_FETCH_ONE,
 } from "../actions/actions.constants";
-import { fetchGroupsAPI, fetchGroupsAPIApproach3 } from "../api/group";
 import {
+  fetchGroupsAPI,
+  fetchGroupsAPIApproach3,
+  fetchOneGroupAPI,
+} from "../api/group";
+import {
+  fetchOneGroupCompletedAction,
   QueryCompletedAction,
   QueryCompletedActionApproach3,
 } from "../actions/groups.actions";
@@ -62,4 +68,14 @@ export function* fetchGroupsApproach3(action: AnyAction): Generator<any> {
 export function* watchGroupQueryChangedApproach3() {
   console.log("watchGroupQueryChanged called");
   yield takeLatest(GROUPS_QUERY_APPROACH3, fetchGroupsApproach3);
+}
+
+export function* fetchOneGroup(action: AnyAction): Generator<any> {
+  const groupResponse: any = yield call(fetchOneGroupAPI, action.payload);
+
+  yield put(fetchOneGroupCompletedAction(groupResponse.data.data));
+}
+
+export function* watchfetchOneGroup() {
+  yield takeEvery(GROUP_FETCH_ONE, fetchOneGroup);
 }

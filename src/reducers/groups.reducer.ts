@@ -5,9 +5,11 @@ import {
   GROUPS_QUERY_APPROACH3,
   GROUPS_QUERY_COMPLETED,
   GROUPS_QUERY_COMPLETED_APPROACH3,
+  GROUP_FETCH_ONE,
+  GROUP_FETCH_ONE_COMPLETED,
 } from "../actions/actions.constants";
 import { Group } from "../modals/Group";
-import { addMany, EntityState, getIds } from "./entity.reducer";
+import { addMany, addOne, EntityState, getIds, select } from "./entity.reducer";
 
 export interface GroupState extends EntityState<Group> {
   query: string;
@@ -82,6 +84,10 @@ export const groupReducer: Reducer<GroupState> = (
         },
         loadingQueryApproach3: false,
       };
+    case GROUP_FETCH_ONE:
+      return select(state, action.payload) as GroupState;
+    case GROUP_FETCH_ONE_COMPLETED:
+      return addOne(state, action.payload) as GroupState;
     default:
       return state;
   }

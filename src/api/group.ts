@@ -30,3 +30,8 @@ export const fetchGroupsAPIApproach3 = (
   const url = BASE_URL + "/groups";
   return get<GroupResponse>(url, { params: data, cancelToken: token });
 };
+
+export const fetchOneGroupAPI = (id: number) => {
+  const url = BASE_URL + "/groups/" + id;
+  return axios.get<GroupResponse>(url);
+};

@@ -4,9 +4,15 @@ export interface EntityState<T extends Entity = any> {
   byId: {
     [id: number]: T;
   };
+  selectedId?: number;
 }
 
 export const getIds = (entities: Entity[]) => entities.map((e) => e.id);
+
+export const select = (state: EntityState, id: number) => ({
+  ...state,
+  selectedId: id,
+});
 
 export const addOne = (state: EntityState, entity: Entity) => {
   //return { ...state, [entity.id]: entity };
