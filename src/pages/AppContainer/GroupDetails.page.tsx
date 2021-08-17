@@ -19,13 +19,13 @@ const GroupDetails: FC<Props> = (props) => {
     dispatch(fetchOneGroupAction(id.toString()));
   }, [id]);
   return (
-    <div>
-      <div className="flex flex-col m-4 p-8 gap-4 rounded-xl bg-gray-900">
-        <GroupCard groupId={id} />
-      </div>
-      <div className="flex justify-around text-lg text-blue-700">
-        <Link to={"/groups/" + (id - 1)}>Previous</Link>
-        <Link to={"/groups/" + (id + 1)}>Next</Link>
+    <div className="w-5/6">
+      <div className="relative flex flex-col m-4 p-8 gap-4 rounded-xl bg-gray-900">
+        <GroupCard />
+        <div className="absolute -mt-6 ml-2 flex gap-8 text-md font-semibold text-white">
+          <Link to={"/groups/" + (id - 1)}>Previous</Link>
+          <Link to={"/groups/" + (id + 1)}>Next</Link>
+        </div>
       </div>
     </div>
   );

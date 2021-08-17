@@ -3,6 +3,7 @@ export const ME_LOGIN = "me/login";
 
 export const GROUP_FETCH_ONE = "group/fetch_one";
 export const GROUP_FETCH_ONE_COMPLETED = "group/fetch_one_completed";
+export const GROUP_FETCH_ONE_ERROR = "group/fetch_one_error";
 
 export const GROUPS_QUERY_APPROACH1 = "groups/queryApproach1";
 export const GROUPS_QUERY_APPROACH2 = "groups/queryApproach2";

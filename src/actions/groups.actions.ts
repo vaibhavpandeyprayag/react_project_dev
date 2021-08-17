@@ -7,6 +7,7 @@ import {
   GROUPS_QUERY_COMPLETED_APPROACH3,
   GROUP_FETCH_ONE,
   GROUP_FETCH_ONE_COMPLETED,
+  GROUP_FETCH_ONE_ERROR,
 } from "./actions.constants";
 
 export const QueryActionApproach1 = (query: string, loading: boolean) => ({
@@ -45,4 +46,9 @@ export const fetchOneGroupAction = (id: string) => ({
 export const fetchOneGroupCompletedAction = (group: Group) => ({
   type: GROUP_FETCH_ONE_COMPLETED,
   payload: group,
+});
+
+export const fetchOneGroupErrorAction = (id: number, msg: string) => ({
+  type: GROUP_FETCH_ONE_ERROR,
+  payload: { id, msg },
 });

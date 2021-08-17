@@ -7,23 +7,32 @@ import {
   GROUPS_QUERY_COMPLETED_APPROACH3,
   GROUP_FETCH_ONE,
   GROUP_FETCH_ONE_COMPLETED,
+  GROUP_FETCH_ONE_ERROR,
 } from "../actions/actions.constants";
 import { Group } from "../modals/Group";
-import { addMany, addOne, EntityState, getIds, select } from "./entity.reducer";
+import {
+  addMany,
+  addOne,
+  EntityState,
+  getIds,
+  initalEntityState,
+  select,
+  setErrorForOne,
+} from "./entity.reducer";
 
 export interface GroupState extends EntityState<Group> {
   query: string;
   queryMap: { [query: string]: number[] };
   loadingQuery?: { [query: string]: boolean }; // For request Approach1 and Approach2
-  loadingQueryApproach3?: boolean;
+  //loadingQueryApproach3?: boolean;
 }
 
 const initialState = {
-  byId: {},
+  ...initalEntityState,
   query: "",
   queryMap: {},
   loadingQuery: {},
-  loadingQueryApproach3: false,
+  //loadingQueryApproach3: false,
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -53,7 +62,7 @@ export const groupReducer: Reducer<GroupState> = (
       return {
         ...state,
         query: action.payload,
-        loadingQueryApproach3: true,
+        loadingList: true,
       };
     case GROUPS_QUERY_COMPLETED:
       const groups = action.payload.groups as Group[];
@@ -82,12 +91,18 @@ export const groupReducer: Reducer<GroupState> = (
           ...newStateApproach3.queryMap,
           [action.payload.query]: groupIdsApproach3,
         },
-        loadingQueryApproach3: false,
+        loadingList: false,
       };
     case GROUP_FETCH_ONE:
       return select(state, action.payload) as GroupState;
     case GROUP_FETCH_ONE_COMPLETED:
-      return addOne(state, action.payload) as GroupState;
+      return addOne(state, action.payload, false) as GroupState;
+    case GROUP_FETCH_ONE_ERROR:
+      return setErrorForOne(
+        state,
+        action.payload.id,
+        action.payload.msg
+      ) as GroupState;
     default:
       return state;
   }
