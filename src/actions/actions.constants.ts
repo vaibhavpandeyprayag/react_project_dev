@@ -1,6 +1,9 @@
 export const ME_FETCH = "me/fetch";
 export const ME_LOGIN = "me/login";
 
+export const USERS_FETCH = "users/fetch";
+export const USERS_FETCH_COMPLETED = "users/fetch_completed";
+
 export const GROUP_FETCH_ONE = "group/fetch_one";
 export const GROUP_FETCH_ONE_COMPLETED = "group/fetch_one_completed";
 export const GROUP_FETCH_ONE_ERROR = "group/fetch_one_error";

@@ -21,6 +21,15 @@ const SideBar: FC<Props> = () => {
           className="hover:scale-95"
           theme="dark"
           onClick={() => {
+            history.push("/people");
+          }}
+        >
+          Users
+        </SolidButton>
+        <SolidButton
+          className="hover:scale-95"
+          theme="dark"
+          onClick={() => {
             history.push("/groupsApproach1");
           }}
         >

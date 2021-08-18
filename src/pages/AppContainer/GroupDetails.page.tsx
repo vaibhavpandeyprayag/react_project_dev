@@ -1,10 +1,7 @@
 import { FC, memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import {
-  fetchOneGroupAction,
-  QueryActionApproach3,
-} from "../../actions/groups.actions";
+import { fetchOneGroupAction } from "../../actions/groups.actions";
 import GroupCard from "../../components/group/GroupCard";
 import { groupQuerySelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";

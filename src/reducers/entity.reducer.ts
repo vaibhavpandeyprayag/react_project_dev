@@ -8,10 +8,12 @@ export interface EntityState<T extends Entity = any> {
   loadingOne: boolean;
   loadingList: boolean;
   errorOne?: string;
+  query: string;
 }
 
 export const initalEntityState = {
   byId: {},
+  query: "",
   loadingOne: false,
   loadingList: false,
 };

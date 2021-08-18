@@ -21,7 +21,6 @@ import {
 } from "./entity.reducer";
 
 export interface GroupState extends EntityState<Group> {
-  query: string;
   queryMap: { [query: string]: number[] };
   loadingQuery?: { [query: string]: boolean }; // For request Approach1 and Approach2
   //loadingQueryApproach3?: boolean;
@@ -29,7 +28,6 @@ export interface GroupState extends EntityState<Group> {
 
 const initialState = {
   ...initalEntityState,
-  query: "",
   queryMap: {},
   loadingQuery: {},
   //loadingQueryApproach3: false,

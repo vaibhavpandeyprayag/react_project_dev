@@ -8,6 +8,7 @@ import GroupsListPage2 from "./GroupsList2.page";
 import GroupsListPage3 from "./GroupsList3.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
+import UsersListPage from "./UsersList.page";
 
 interface Props {}
 
@@ -20,6 +21,9 @@ const AppContainer: FC<Props> = (props) => {
       <Switch>
         <Route path="/dashboard">
           <DashboardPage />
+        </Route>
+        <Route path="/people">
+          <UsersListPage />
         </Route>
         <Route path="/groups/:id">
           <GroupDetailsPage />

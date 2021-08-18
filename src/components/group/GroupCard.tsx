@@ -1,6 +1,5 @@
 import { FC, HTMLAttributes, memo } from "react";
 import {
-  queryIdsSelector,
   selectedGroupErrorSelector,
   selectedGroupLoadingSelector,
   selectedGroupSelector,
@@ -15,7 +14,6 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
   const group = useAppSelector(selectedGroupSelector);
   const loading = useAppSelector(selectedGroupLoadingSelector);
   const error = useAppSelector(selectedGroupErrorSelector);
-  //const groupIds = useAppSelector(queryIdsSelector);
   return (
     <div>
       {group ? (
