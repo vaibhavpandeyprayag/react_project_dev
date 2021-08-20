@@ -13,7 +13,7 @@ import {
   watchGroupQueryChangedApproach2,
   watchGroupQueryChangedApproach3,
 } from "./sagas/groups.sagas";
-import { watchfetchUsers } from "./sagas/users.sagas";
+import { watchfetchOneUser, watchfetchUsers } from "./sagas/users.sagas";
 
 const reducer = combineReducers({
   users: userReducer,
@@ -36,6 +36,7 @@ function* rootSaga() {
     watchGroupQueryChangedApproach3(),
     watchfetchOneGroup(),
     watchfetchUsers(),
+    watchfetchOneUser(),
   ]);
 }
 

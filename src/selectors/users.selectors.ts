@@ -21,6 +21,25 @@ export const usersQuerySelector = createSelector(
   (userState) => userState.query
 );
 
+export const selectedUserErrorSelector = createSelector(
+  [userStateSelector],
+  (userState) => userState.errorOne
+);
+
+export const selectedIdSelector = createSelector(
+  [userStateSelector],
+  (userState) => userState.selectedId
+);
+
+export const selectedUserSelector = createSelector(
+  [usersByIdSelector, selectedIdSelector],
+  (byId, id) => id && byId[id]
+);
+export const selectedUserLoadingSelector = createSelector(
+  [userStateSelector],
+  (userState) => userState.loadingOne
+);
+
 export const usersSelector = createSelector(
   [usersByIdSelector, usersIdsSelector],
   (byId, ids) => {

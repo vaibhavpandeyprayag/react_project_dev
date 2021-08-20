@@ -3,14 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchOneGroupAction } from "../../actions/groups.actions";
 import GroupCard from "../../components/group/GroupCard";
-import { groupQuerySelector } from "../../selectors/groups.selectors";
-import { useAppSelector } from "../../store";
 
 interface Props {}
 
 const GroupDetails: FC<Props> = (props) => {
   const id = +useParams<{ id: string }>().id;
-  const query = useAppSelector(groupQuerySelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOneGroupAction(id.toString()));

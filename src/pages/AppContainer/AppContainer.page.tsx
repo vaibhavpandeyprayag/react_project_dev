@@ -9,6 +9,7 @@ import GroupsListPage3 from "./GroupsList3.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
 import UsersListPage from "./UsersList.page";
+import UserDetailsPage from "./UserDetails.page";
 
 interface Props {}
 
@@ -21,6 +22,9 @@ const AppContainer: FC<Props> = (props) => {
       <Switch>
         <Route path="/dashboard">
           <DashboardPage />
+        </Route>
+        <Route path="/people/:id">
+          <UserDetailsPage />
         </Route>
         <Route path="/people">
           <UsersListPage />

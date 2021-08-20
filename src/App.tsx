@@ -61,6 +61,7 @@ const App: FC<Props> = (props) => {
                 "/groupsApproach3",
                 "/groups/:id",
                 "/people",
+                "/people/:id",
               ]}
               exact
             >

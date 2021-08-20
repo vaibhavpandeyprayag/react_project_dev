@@ -48,11 +48,11 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Creator: </span>
-              {group.creator.first_name +
+              {(group.creator.first_name ? group.creator.first_name : "") +
                 " " +
                 (group.creator.middle_name ? group.creator.middle_name : "") +
                 " " +
-                group.creator.last_name}
+                (group.creator.last_name ? group.creator.last_name : "")}
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Updated at: </span>

@@ -4,6 +4,9 @@ import {
   ME_LOGIN,
   USERS_FETCH,
   USERS_FETCH_COMPLETED,
+  USER_FETCH_ONE,
+  USER_FETCH_ONE_COMPLETED,
+  USER_FETCH_ONE_ERROR,
 } from "../actions/actions.constants";
 import { User } from "../modals/User";
 import {
@@ -12,6 +15,8 @@ import {
   EntityState,
   getIds,
   initalEntityState,
+  select,
+  setErrorForOne,
 } from "./entity.reducer";
 
 export interface UserState extends EntityState<User> {
@@ -31,6 +36,16 @@ export const userReducer: Reducer<UserState> = (
     case ME_FETCH:
     case ME_LOGIN:
       return addOne(state, action.payload) as UserState;
+    case USER_FETCH_ONE:
+      return select(state, action.payload) as UserState;
+    case USER_FETCH_ONE_COMPLETED:
+      return addOne(state, action.payload, false) as UserState;
+    case USER_FETCH_ONE_ERROR:
+      return setErrorForOne(
+        state,
+        action.payload.id,
+        action.payload.msg
+      ) as UserState;
     case USERS_FETCH:
       return { ...state, query: action.payload, loadingList: true };
     case USERS_FETCH_COMPLETED:
