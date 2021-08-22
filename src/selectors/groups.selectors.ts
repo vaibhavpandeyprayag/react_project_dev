@@ -1,5 +1,6 @@
 import { groupStateSelector } from "./app.selectors";
 import { createSelector } from "reselect";
+import { usersByIdSelector } from "./users.selectors";
 
 export const groupQuerySelector = createSelector(
   [groupStateSelector],
@@ -32,8 +33,20 @@ export const selectedIdSelector = createSelector(
 );
 
 export const selectedGroupSelector = createSelector(
-  [groupByIdSelector, selectedIdSelector],
-  (byId, id) => id && byId[id]
+  [groupByIdSelector, selectedIdSelector, usersByIdSelector],
+  (byId, id, usersById) => {
+    if (!id) return undefined;
+
+    const group = byId[id];
+    const creator = usersById[group ? (group.creator as any) : ""];
+    const participants = group
+      ? group.participants.map((p: any) => usersById[p])
+      : {};
+    const invitedMembers = group
+      ? group.invitedMembers.map((m: any) => usersById[m])
+      : {};
+    return { ...group, creator, participants, invitedMembers };
+  }
 );
 
 export const groupQueryLoadingSelector = createSelector(

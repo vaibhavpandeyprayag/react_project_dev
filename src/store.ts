@@ -8,7 +8,7 @@ import { groupReducer } from "./reducers/groups.reducer";
 import { userReducer } from "./reducers/users.reducer";
 import { sagaMiddleware } from "./sagas";
 import {
-  watchfetchOneGroup,
+  watchFetchOneGroup,
   watchGroupQueryChangedApproach1,
   watchGroupQueryChangedApproach2,
   watchGroupQueryChangedApproach3,
@@ -34,7 +34,7 @@ function* rootSaga() {
     watchGroupQueryChangedApproach1(),
     watchGroupQueryChangedApproach2(),
     watchGroupQueryChangedApproach3(),
-    watchfetchOneGroup(),
+    watchFetchOneGroup(),
     watchfetchUsers(),
     watchfetchOneUser(),
   ]);

@@ -1,3 +1,4 @@
+import { normalize } from "normalizr";
 import { Reducer } from "redux";
 import {
   GROUPS_QUERY_APPROACH1,
@@ -10,6 +11,7 @@ import {
   GROUP_FETCH_ONE_ERROR,
 } from "../actions/actions.constants";
 import { Group } from "../modals/Group";
+import { groupSchema } from "../modals/schemas";
 import {
   addMany,
   addOne,
@@ -23,14 +25,14 @@ import {
 export interface GroupState extends EntityState<Group> {
   queryMap: { [query: string]: number[] };
   loadingQuery?: { [query: string]: boolean }; // For request Approach1 and Approach2
-  //loadingQueryApproach3?: boolean;
+  //loadingQueryApproach3?: boolean; - in EntityState
 }
 
 const initialState = {
   ...initalEntityState,
   queryMap: {},
   loadingQuery: {},
-  //loadingQueryApproach3: false,
+  //loadingQueryApproach3: false, - in initialEntityState
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -79,22 +81,28 @@ export const groupReducer: Reducer<GroupState> = (
         },
       };
     case GROUPS_QUERY_COMPLETED_APPROACH3:
-      const groupsApproach3 = action.payload.groups as Group[];
-      const groupIdsApproach3 = getIds(groupsApproach3);
+      const groupsByIdsApproach3 = action.payload.groupsById;
+      const groupIdsApproach3 = Object.keys(groupsByIdsApproach3);
 
-      const newStateApproach3 = addMany(state, groupsApproach3) as GroupState;
       return {
-        ...newStateApproach3,
+        ...state,
+        byId: { ...state.byId, ...groupsByIdsApproach3 },
         queryMap: {
-          ...newStateApproach3.queryMap,
+          ...state.queryMap,
           [action.payload.query]: groupIdsApproach3,
         },
         loadingList: false,
       };
     case GROUP_FETCH_ONE:
       return select(state, action.payload) as GroupState;
-    case GROUP_FETCH_ONE_COMPLETED:
-      return addOne(state, action.payload, false) as GroupState;
+    case GROUP_FETCH_ONE_COMPLETED: {
+      const data = normalize(action.payload, groupSchema);
+      return {
+        ...state,
+        byId: { ...state.byId, ...data.entities.groups },
+        loadingOne: false,
+      };
+    }
     case GROUP_FETCH_ONE_ERROR:
       return setErrorForOne(
         state,

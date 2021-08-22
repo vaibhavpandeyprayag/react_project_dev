@@ -24,6 +24,9 @@ import {
   QueryCompletedAction,
   QueryCompletedActionApproach3,
 } from "../actions/groups.actions";
+import { normalize } from "normalizr";
+import { groupSchema } from "../modals/schemas";
+import { usersListReceived } from "../actions/users.actions";
 
 export function* fetchGroupsApproach1(action: AnyAction): Generator<any> {
   const output: any = yield call(fetchGroupsAPI, {
@@ -61,9 +64,12 @@ export function* fetchGroupsApproach3(action: AnyAction): Generator<any> {
     status: "all-groups",
   });
 
+  const data = normalize(groupResponse.data.data, [groupSchema]);
+
   yield put(
-    QueryCompletedActionApproach3(action.payload, groupResponse.data.data)
+    QueryCompletedActionApproach3(action.payload, data.entities.groups as any)
   );
+  yield put(usersListReceived(data.entities.users as any));
 }
 
 export function* watchGroupQueryChangedApproach3() {
@@ -81,6 +87,7 @@ export function* fetchOneGroup(action: AnyAction): Generator<any> {
   }
 }
 
-export function* watchfetchOneGroup() {
+export function* watchFetchOneGroup() {
+  console.log("watchFetchOneGroup called");
   yield takeEvery(GROUP_FETCH_ONE, fetchOneGroup);
 }

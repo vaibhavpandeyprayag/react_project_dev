@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { userStateSelector } from "./app.selectors";
 
-const usersByIdSelector = createSelector(
+export const usersByIdSelector = createSelector(
   [userStateSelector],
   (userState) => userState.byId
 );

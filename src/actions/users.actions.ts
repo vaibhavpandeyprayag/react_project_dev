@@ -5,6 +5,7 @@ import {
   USER_FETCH_ONE,
   USER_FETCH_ONE_COMPLETED,
   USER_FETCH_ONE_ERROR,
+  USERS_LIST_RECEIVED,
 } from "./actions.constants";
 
 export const usersFetchAction = (query: string) => ({
@@ -15,6 +16,11 @@ export const usersFetchAction = (query: string) => ({
 export const usersFetchCompletedAction = (users: User[]) => ({
   type: USERS_FETCH_COMPLETED,
   payload: users,
+});
+
+export const usersListReceived = (usersById: { [id: number]: User }) => ({
+  type: USERS_LIST_RECEIVED,
+  payload: usersById,
 });
 
 export const fetchOneUserAction = (id: string) => ({

@@ -4,6 +4,7 @@ import {
   ME_LOGIN,
   USERS_FETCH,
   USERS_FETCH_COMPLETED,
+  USERS_LIST_RECEIVED,
   USER_FETCH_ONE,
   USER_FETCH_ONE_COMPLETED,
   USER_FETCH_ONE_ERROR,
@@ -52,6 +53,8 @@ export const userReducer: Reducer<UserState> = (
       const newState = addMany(state, action.payload);
       const ids = getIds(action.payload);
       return { ...newState, usersIds: ids, loadingList: false };
+    case USERS_LIST_RECEIVED:
+      return { ...state, byId: { ...state.byId, ...action.payload } };
     default:
       return state;
   }

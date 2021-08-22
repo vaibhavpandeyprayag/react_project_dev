@@ -32,10 +32,10 @@ export const QueryCompletedAction = (query: string, groups: Group[]) => ({
 
 export const QueryCompletedActionApproach3 = (
   query: string,
-  groups: Group[]
+  groupsById: { [id: number]: Group }
 ) => ({
   type: GROUPS_QUERY_COMPLETED_APPROACH3,
-  payload: { query, groups },
+  payload: { query, groupsById },
 });
 
 export const fetchOneGroupAction = (id: string) => ({

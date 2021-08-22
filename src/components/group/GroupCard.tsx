@@ -16,7 +16,7 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
   const error = useAppSelector(selectedGroupErrorSelector);
   return (
     <div>
-      {group ? (
+      {group && group !== null ? (
         <div
           className={
             "relative flex items-start gap-8 my-2 mx-2 p-8 rounded-xl border bg-gray-50 hover:bg-gray-200 " +
@@ -48,11 +48,13 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Creator: </span>
-              {(group.creator.first_name ? group.creator.first_name : "") +
-                " " +
-                (group.creator.middle_name ? group.creator.middle_name : "") +
-                " " +
-                (group.creator.last_name ? group.creator.last_name : "")}
+              {group.creator
+                ? (group.creator.first_name ? group.creator.first_name : "") +
+                  " " +
+                  (group.creator.middle_name ? group.creator.middle_name : "") +
+                  " " +
+                  (group.creator.last_name ? group.creator.last_name : "")
+                : ""}
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Updated at: </span>
@@ -68,7 +70,7 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
             </h3>
           </div>
         </div>
-      ) : error ? (
+      ) : error || group === null ? (
         <div className="text-white text-lg font-semibold text-center">
           {"Error: " + error}
         </div>

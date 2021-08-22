@@ -50,7 +50,7 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
   if (entities.length === 0) return state;
 
   const entityMap = entities.reduce((prev, entity) => {
-    return { ...prev, [entity.id]: entity };
+    return entity ? { ...prev, [entity.id]: entity } : {};
   }, {});
   return {
     ...state,

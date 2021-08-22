@@ -12,10 +12,7 @@ export interface Group extends Entity {
   created_at: Date;
   updated_at: Date;
   chatCount: number;
-  state: State;
   creator: User;
-  issues: any[];
   invitedMembers: User[];
   participants: User[];
-  advocatePage?: string;
 }
