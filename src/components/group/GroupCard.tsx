@@ -2,7 +2,9 @@ import { FC, HTMLAttributes, memo } from "react";
 import {
   selectedGroupCreatorSelector,
   selectedGroupErrorSelector,
+  selectedGroupInvitedMembersSelector,
   selectedGroupLoadingSelector,
+  selectedGroupParticipantsSelector,
   selectedGroupSelector,
 } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
@@ -16,6 +18,12 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
   const loading = useAppSelector(selectedGroupLoadingSelector);
   const error = useAppSelector(selectedGroupErrorSelector);
   const creator = useAppSelector(selectedGroupCreatorSelector);
+  const participants = useAppSelector(selectedGroupParticipantsSelector)?.join(
+    ", "
+  );
+  const invitedMembers = useAppSelector(
+    selectedGroupInvitedMembersSelector
+  )?.join(", ");
   return (
     <div>
       {group && group !== null ? (
@@ -57,6 +65,14 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
                   " " +
                   (creator.last_name ? creator.last_name : "")
                 : ""}
+            </h3>
+            <h3 className="text-sm font-normal">
+              <span className="font-semibold">Participants: </span>
+              {participants ? participants : ""}
+            </h3>
+            <h3 className="text-sm font-normal">
+              <span className="font-semibold">Invited Members: </span>
+              {invitedMembers ? invitedMembers : ""}
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Updated at: </span>
