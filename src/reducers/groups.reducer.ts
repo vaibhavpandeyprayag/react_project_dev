@@ -82,7 +82,9 @@ export const groupReducer: Reducer<GroupState> = (
       };
     case GROUPS_QUERY_COMPLETED_APPROACH3:
       const groupsByIdsApproach3 = action.payload.groupsById;
-      const groupIdsApproach3 = Object.keys(groupsByIdsApproach3);
+      const groupIdsApproach3 = groupsByIdsApproach3
+        ? Object.keys(groupsByIdsApproach3)
+        : [];
 
       return {
         ...state,

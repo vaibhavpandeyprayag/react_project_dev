@@ -1,5 +1,6 @@
 import { FC, HTMLAttributes, memo } from "react";
 import {
+  selectedGroupCreatorSelector,
   selectedGroupErrorSelector,
   selectedGroupLoadingSelector,
   selectedGroupSelector,
@@ -14,6 +15,7 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
   const group = useAppSelector(selectedGroupSelector);
   const loading = useAppSelector(selectedGroupLoadingSelector);
   const error = useAppSelector(selectedGroupErrorSelector);
+  const creator = useAppSelector(selectedGroupCreatorSelector);
   return (
     <div>
       {group && group !== null ? (
@@ -48,12 +50,12 @@ const GroupCard: FC<Props> = ({ imgclassName, className }) => {
             </h3>
             <h3 className="text-sm font-normal">
               <span className="font-semibold">Creator: </span>
-              {group.creator
-                ? (group.creator.first_name ? group.creator.first_name : "") +
+              {creator
+                ? (creator.first_name ? creator.first_name : "") +
                   " " +
-                  (group.creator.middle_name ? group.creator.middle_name : "") +
+                  (creator.middle_name ? creator.middle_name : "") +
                   " " +
-                  (group.creator.last_name ? group.creator.last_name : "")
+                  (creator.last_name ? creator.last_name : "")
                 : ""}
             </h3>
             <h3 className="text-sm font-normal">

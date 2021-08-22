@@ -49,6 +49,11 @@ export const selectedGroupSelector = createSelector(
   }
 );
 
+export const selectedGroupCreatorSelector = createSelector(
+  [selectedGroupSelector],
+  (group) => group?.creator
+);
+
 export const groupQueryLoadingSelector = createSelector(
   [groupStateSelector],
   (groupState) => groupState.loadingQuery!
